@@ -1,0 +1,49 @@
+#!/bin/bash
+# 10-functions
+# aoneill - 11/26/15
+
+# Printing certain statistics about drives
+function printDriveStats() {
+  disp=$1
+
+  # If a name is passed in as well, display it
+  if (( $# == 2 )); then
+    echo -ne "${BLD_BLU}$1${TXT_RST}: "
+    disp=$2
+  fi
+
+  free="$(df -h | grep $1 |\
+    perl -n -e '/(.*)G (.*)G (.*)G/ && print($2)' |\
+    sed -e 's/ //g')G"
+  used="$(df -h | grep $1 |\
+    perl -n -e '/(.*)G (.*)G (.*)G/ && print($3)' |\
+    sed -e 's/ //g')G"
+
+  # Print statistics
+  echo -ne "${BLD_CYN}${disp}${TXT_RST} -- "
+  echo -ne "Used Space: ${BLD_RED}${free}${TXT_RST}, "
+  echo -ne "Free Space: ${BLD_GRN}${used}${TXT_RST}"
+  echo
+}
+
+# Set the title of the Termite window
+function title() { echo -e "\e]0;$@\a"; }
+
+# Quick helper for error messages
+function error() { echo -e "${BLD_RED}$@${BLD_RST}"; }
+
+# Special Latex compiler, for use with DFA's in LaTeX
+function dfatex() {
+  latex -halt-on-error "$1" &&\
+    dvips "${1%.*}.dvi" &&\
+    ps2pdf "${1%.*}.ps"
+}
+
+# Make a rainbow!
+function rainbow() {
+  yes "$(seq 1 255)" | while read i
+  do
+    printf "\x1b[48;5;${i}m\n"
+    sleep .01
+  done
+}

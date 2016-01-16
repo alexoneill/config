@@ -1,0 +1,31 @@
+#!/bin/bash
+# makesml
+# aoneill - 11/27/15
+
+usage() { 
+  # Basic usage information
+  echo "Usage: $0 makefile"
+  echo "  makefile: The 'sources.cm' file for the SML code"
+  exit
+}
+
+# Choose which file to use
+if [ "$#" -eq 0 ] || [ "$#" -gt 1 ]
+then
+  if [ -e "sources.cm" ]
+  then
+    file="sources.cm"
+  else
+    usage
+  fi
+fi
+
+# Check for existance
+if [ -e "$file" ]
+then
+  # Make the SML
+  echo "CM.make \"$file\"" | sml
+else
+  echo "$file: file not found"
+  usage
+fi

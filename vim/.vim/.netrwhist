@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/aoneill/.data/Dropbox/Programming/Bash/.bashrc.d'
+let g:netrw_dirhist_2='/home/aoneill/.data/Dropbox/Programming/Bash/.bashrc.d/completion'
+let g:netrw_dirhist_3='/home/aoneill/.bin'
+let g:netrw_dirhist_4='/home/aoneill/.data/Dropbox/Work/Carnegie Mellon/2016/15-210/hw/superlab'
+let g:netrw_dirhist_5='/home/aoneill/tmp/arch-setup/resources/setup/netctl-auto/interfaces'
+let g:netrw_dirhist_6='/home/aoneill/tmp/arch-setup/resources/setup/slim'
+let g:netrw_dirhist_7='/home/aoneill/tmp/arch-setup/resources/setup/cups'

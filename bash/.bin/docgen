@@ -1,0 +1,134 @@
+#!/usr/bin/python
+# Alex O'Neill - aoneill@cmu.edu
+
+#########################################################
+## 15-150 Function Type / Requires / Ensures Generator ##
+#########################################################
+
+import sys, glob, os, subprocess
+
+def usage():
+  print "Usage: docgen <filepath>, <filepath>, ..."
+
+# Try to detect if we should place documentation or not
+def detectDoc(lines, i):
+  if(i < 4):
+    return True
+  
+  # Check to see if it already has documentation
+  for line in lines[i - 4:i]:
+    if("require" in line.lower() or "ensure" in line.lower()):
+      return False
+
+  return True
+
+# Where the magic happens!
+def produceDocumentation(path, fileName):
+  smlFile = open(path)
+
+  # Get lines
+  lines = [line for line in smlFile]
+  smlFile.close()
+
+  # Run the file in the interpreter
+  pipeIn = subprocess.Popen(["echo", 
+             "use \"%s\"; val _ = OS.Process.exit(OS.Process.success);" % path],
+             stdout = subprocess.PIPE)
+  
+  # Try to open the file
+  try:
+    output = subprocess.check_output(["sml"], stdin = pipeIn.stdout,
+                                     stderr = subprocess.PIPE).splitlines()
+  except:
+    print fileName, "could not be compiled by SML!"
+    usage()
+    sys.exit(0)
+
+  # Parse the sml file, mapping function names to function types
+  smlRef = {}
+  i = 0
+  while (i < len(output)):
+    line = output[i]
+    if(line.startswith("val")):
+      line = line[3:]
+
+      multipleLines = [line]
+      while (i < len(output) - 1 and not (output[i + 1].startswith("val")
+        or output[i + 1].startswith("type") 
+        or output[i + 1].startswith("datatype"))):
+        multipleLines += [output[i + 1]]
+        i += 1
+
+      fnDec = reduce(lambda x, y : x.strip() + " " + y.strip(), multipleLines)
+      (fnName, fnType) = tuple(map(lambda x: x.strip(), fnDec.split(":")))
+      fnName = fnName.split()[0]
+
+      # Store
+      smlRef[fnName] = fnType
+    i += 1
+  
+  # Create a list of the final file output
+  finalLines = []
+  for i in xrange(len(lines)):
+    # Find functions
+    if(lines[i].startswith("fun") and detectDoc(lines, i)):
+      fnName = lines[i][3:].strip().split()[0]
+   
+      # Do not handle functions from outside sources
+      if(fnName in smlRef):
+        fnType = smlRef[fnName]
+ 
+        # Insert the compiled information
+        finalLines += ["(*\n"]
+        finalLines += ["    %s : %s\n" % (fnName, fnType)]
+        finalLines += ["    REQUIRES: true\n"]
+        finalLines += ["    ENSURES: %s\n" % fnName]
+        finalLines += ["*)\n"]
+    
+    finalLines += [lines[i]]
+
+  # Write to a temp file, tell user
+  outFile = open(path + ".tmp", "w")
+  for line in finalLines:
+    outFile.write(line)
+  outFile.close()
+
+  print ("%s -> %s!" % (fileName, fileName + ".tmp"))
+
+# Where the magic is invoked
+def main():
+  args = sys.argv
+  
+  # Usage check
+  if(len(args) < 2):
+    usage()
+    sys.exit(0)
+ 
+  # Open files
+  notFound = False
+  for arg in args[1:]:
+    # Absolute paths
+    if(arg[0] == "/"):
+      path = arg
+    else:
+      path = os.path.join(os.getcwd(), arg)
+
+    # Try wildcards
+    if(not os.path.isfile(path)):
+      possible = glob.glob(path)
+      if(len(possible)):
+        for fileName in possible:
+          produceDocumentation(path, fileName)
+      else:
+        notFound = True
+        print arg, "not found!"
+    else:
+      produceDocumentation(path, arg)
+ 
+  # Show doc if a file was invalid
+  if(notFound):
+    usage()
+
+# Run it!
+if(__name__ == "__main__"):
+  main()

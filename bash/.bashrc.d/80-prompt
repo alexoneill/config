@@ -1,0 +1,64 @@
+#!/bin/bash
+# 80-prompt
+# aoneill - 11/26/15
+
+function prompt_command {
+  HOST="\[${BLD_GRN}\]\u@\h\[${TXT_RST}\]"
+
+  git branch &>/dev/null;
+  if [ "$?" -eq 0 ]
+  then
+    git status | grep "nothing to commit" > /dev/null 2>&1;
+
+    # Changed files
+    if [ "$?" -eq "0" ]; then
+      git cherry -v | grep "+" > /dev/null 2>&1;
+      
+      # Uncommitted Changes
+      if [ "$?" -eq "0" ]; then
+        GIT=$BLD_PUR
+      else
+        GIT=$BLD_CYN
+      fi
+    else
+      GIT=$BLD_RED
+    fi
+
+    # Finding highest directory that has no git
+    curPath="$(pwd)"
+    find . -maxdepth 1 -type d | grep ".git$" > /dev/null 2>&1;
+    if [ $? -ne 0 ]; then
+      while [ "$(pwd)" != "/" ]; do
+        cd ..
+
+        find . -maxdepth 1 -type d | grep ".git" > /dev/null 2>&1;
+        if [ $? -eq 0 ]; then
+          cd ..
+          break
+        fi
+      done
+    else
+      cd ..
+    fi
+   
+    # Go back to the current directory
+    nonGit="$(pwd)"
+    cd "$curPath"
+
+    # Path to Git folder
+    gitPath="$(echo "$curPath" | sed "s|$nonGit||")"
+
+    # Fix the ~ issue with pwd
+    nonGit="$(echo "$nonGit" | sed "s|^$HOME|~|")"
+
+    # Color accordingly
+    DIR="\[${BLD_BLU}\]$nonGit\[${GIT}\]$gitPath\[${TXT_RST}\]"
+  else
+    DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
+  fi
+
+  # Export proper coloring
+  PS1="${HOST}:${DIR}$ "  
+}
+
+PROMPT_COMMAND=prompt_command

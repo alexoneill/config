@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Distill down information about discovered networks
+file=$(mktemp)
+iwlist wlp3s0 scan \
+  | grep "Address\|Quality\|Encryption\|ESSID" \
+  | sed -e "s/^ \+//g" \
+  | awk '{ if(NR % 4) printf("%s ", $0); else printf("%s\n", $0); }' \
+  | sed -e 's/.*Address: \([0-9A-Z:]\+\) .*=\([0-9]\+\/[0-9]\+\) '\
+'.*=\(-[0-9]\+\) .*:\(on\|off\) .*:"\(.*\)".*/\2 \3 \4 \1 \5/g' \
+  | sort -rn > $file
+
+# Find the maximum width of found SSIDs
+ssidWidth="$(cat $file | awk '{ $1=$2=$3=$4=""; print substr($0, 5); }' | wc -L)"
+
+# Format output nicely
+cat $file | while IFS= read -r line; do         
+  power=$(echo $line | awk '{ print $1; }')
+  raw=$(echo $line | awk '{ print $2; }')
+  type=$(echo $line | awk '{ print $3; }')
+  mac=$(echo $line | awk '{ print $4; }')
+  ssid=$(echo $line | awk '{ $1=$2=$3=$4=""; print substr($0, 5); }')
+
+  power=$(printf "%3.0f" "$(echo "($power) * 100" | bc -l)")
+  raw=$(printf "%3d" $raw)
+  type=$([[ "$type" == "off" ]] && echo " " || echo "*")
+  ssid=$(printf "%-${ssidWidth}s" "$ssid")
+
+  echo "$power% ($raw) $type $ssid ($mac)"
+done
+
+rm $file

@@ -1,0 +1,61 @@
+#!/bin/bash
+# 00-export
+# aoneill - 11/26/15
+
+# Exports
+export PATH=$HOME/.bin:$PATH
+
+# Vim all the way!
+export GIT_EDITOR=vim
+export VISUAL=vim
+export EDITOR=vim
+
+# Colors for termite
+eval $(dircolors ~/.bashrc.d/data/dircolors)
+
+# Unicode support for less
+export LESSCHARSET=utf-8
+
+# Colors
+# Regular
+export TXT_BLK='\e[0;30m' # Black - Regular
+export TXT_RED='\e[0;31m' # Red
+export TXT_GRN='\e[0;32m' # Green
+export TXT_YLW='\e[0;33m' # Yellow
+export TXT_BLU='\e[0;34m' # Blue
+export TXT_PUR='\e[0;35m' # Purple
+export TXT_CYN='\e[0;36m' # Cyan
+export TXT_WHT='\e[0;37m' # White
+
+# Bold
+export BLD_BLK='\e[1;30m' # Black - Bold
+export BLD_RED='\e[1;31m' # Red
+export BLD_GRN='\e[1;32m' # Green
+export BLD_YLW='\e[1;33m' # Yellow
+export BLD_BLU='\e[1;34m' # Blue
+export BLD_PUR='\e[1;35m' # Purple
+export BLD_CYN='\e[1;36m' # Cyan
+export BLD_WHT='\e[1;37m' # White
+
+# Underline
+export UNK_BLK='\e[4;30m' # Black - Underline
+export UND_RED='\e[4;31m' # Red
+export UND_GRN='\e[4;32m' # Green
+export UND_YLW='\e[4;33m' # Yellow
+export UND_BLU='\e[4;34m' # Blue
+export UND_PUR='\e[4;35m' # Purple
+export UND_CYN='\e[4;36m' # Cyan
+export UND_WHT='\e[4;37m' # White
+
+# Background
+export BAK_BLK='\e[40m'   # Black - Background
+export BAK_RED='\e[41m'   # Red
+export BAK_GRN='\e[42m'   # Green
+export BAK_YLW='\e[43m'   # Yellow
+export BAK_BLU='\e[44m'   # Blue
+export BAK_PUR='\e[45m'   # Purple
+export BAK_CYN='\e[46m'   # Cyan
+export BAK_WHT='\e[47m'   # White
+
+# Reset
+export TXT_RST='\e[0m'    # Text Reset

@@ -1,0 +1,17 @@
+#!/bin/bash
+# netctl-restart
+# aoneill - 12/04/15
+
+interface=wlp3s0
+delay=30
+if (( $# > 0 ))
+then
+  delay=$1
+fi
+
+# Restart wpa_supplicant
+systemctl stop netctl-auto@${interface}.service
+iwconfig $interface power off
+sleep $delay
+iwconfig $interface power on
+systemctl start netctl-auto@${interface}.service

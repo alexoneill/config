@@ -1,0 +1,44 @@
+#!/bin/bash
+# amount
+# aoneill - 10/08/15
+
+# Ensure nothing is mounted
+mounted=$(mount | grep "on /mnt")
+if [[ "$mounted" != "" ]]
+then
+  echo "Erorr: $(echo $mounted | awk -e '{print $1};') already mounted on /mnt!"
+  exit
+fi
+
+# Enaure root access
+if [[ $(whoami) != "root" ]]
+then
+  echo "Error: Mounting requires root access!"
+  exit
+fi
+
+# Get candidate devices
+devs=$(mktemp)
+lsblk -npJlo name,type,mountpoint,label \
+  | grep '"mountpoint": null' \
+  | grep '"type": "part"' \
+  | sed -e 's/null/""/g' \
+  | sed -e 's/.*"name": "\([^"]*\)",.*"label": "\([^"]*\)".*/\1 \2/g' > $devs
+
+# Display a menu to choose device
+exec 3>&1
+out=$(eval "dialog --title \"Auto mount\" --menu \"Mount point:\" 14 40 7 \
+        $(cat $devs | awk -e '{printf "%d \"%s\" ", NR, $0}')" 2>&1 1>&3)
+exec 3>&-
+
+# Make sure something was chosen
+clear
+[[ "$out" == "" ]] && exit
+
+# Lookup device
+device=$(sed -e "${out}q;d" $devs)
+rm $devs
+
+# Mount with passed flags
+mount $@ $(echo $device | awk -e '{print $1;}') /mnt && \
+  echo "Mounted $(echo $device | awk -e '{print $1;}') on /mnt."

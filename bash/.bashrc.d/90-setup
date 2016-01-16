@@ -1,0 +1,6 @@
+#!/bin/bash
+# 90-setup
+# aoneill - 11/26/15
+
+# Fix line sizing issues
+shopt -s checkwinsize

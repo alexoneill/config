@@ -1,0 +1,5 @@
+#!/bin/bash
+# makesml
+# aoneill - 11/27/15
+
+complete -fX '*.sml' makesml

@@ -1,0 +1,22 @@
+#!/bin/bash
+# aumount
+# aoneill - 10/08/15
+
+# Ensure root access
+if [[ $(whoami) != "root" ]]
+then
+  echo "Error: Mounting requires root access!"
+  exit
+fi
+
+# Check that something is mounted on /mnt
+mounted=$(mount | grep "on /mnt")
+if [[ "$mounted" == "" ]]
+then
+  echo "Error: No device mounted on /mnt!"
+  exit
+fi
+  
+# Unmount it!
+umount /mnt && \
+  echo "Unmounted $(echo $mounted | awk -e '{print $1;}') from /mnt."

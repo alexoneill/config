@@ -1,0 +1,6 @@
+#!/bin/bash
+# pacro
+# aoneill - 12/01/15
+
+# Remove orphans
+pacman -Rns $(pacman -Qtdq)

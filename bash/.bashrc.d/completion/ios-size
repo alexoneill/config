@@ -1,0 +1,5 @@
+#!/bin/bash
+# ios-size
+# aoneill - 11/27/15
+
+complete -fX '*.@(jpg|jpeg|png)' ios-size

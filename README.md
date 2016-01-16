@@ -1,2 +1,2 @@
 # config
-Various environment configurations, typically for bash
+Various environment configurations

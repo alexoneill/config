@@ -1,0 +1,28 @@
+#!/bin/bash
+# ios-size
+# aoneill - 11/27/15
+
+function usage() {
+  # Basic usage information
+  echo "usage: $0 file"
+  echo "  file: An image file, either a JPG, JPEG ot PNG"
+  exit
+}
+
+[[ "$1" == "" ]] && usage
+
+# Setup
+file=$(greadlink -f "$1")
+dir=icons
+mkdir -p $dir
+cd $dir
+
+# Output in each size
+sizes="29 40 50 58 72 76 80 87 100 120 144 152 180 512 1024"
+for size in $sizes
+do
+  newFile="$size.${file##*.}"
+  cp "$file" "$newFile"
+  sips -Z $size "$newFile" > /dev/null
+  echo "$file -> $dir/$newFile"
+done

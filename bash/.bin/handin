@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if (( $# < 2 ))
+then
+  echo "Usage:"
+  echo "$0 [hwID] <files>"
+  exit
+fi
+
+hwName="$1"
+files="${*:2}"
+tarName="$hwName.tgz"
+remoteDir=".tmp-122-handin"
+
+for elem in $files
+do
+  if [ ! -f $elem ]
+  then
+    echo "$elem: File not found!"
+    exit
+  fi
+done
+
+echo "Compressing into $tarName..."
+tar -czf "$tarName" $files
+
+echo "Logging into Andrew..."
+cat "$tarName" | ssh aoneill@unix.andrew.cmu.edu "cat > '$tarName'; mkdir '$remoteDir'; mv '$tarName' '$remoteDir'; cd '$remoteDir'; tar -xf '$tarName'; rm '$tarName'; echo 'Handing in...'; /afs/andrew/course/15/122/bin/handin $hwName * 2>/dev/null; echo 'Cleaning up...'; cd ../; rm -rf '$remoteDir'"
+
+echo "Removing $tarName..."
+rm $tarName

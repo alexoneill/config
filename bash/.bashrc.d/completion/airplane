@@ -1,0 +1,19 @@
+#!/bin/bash
+# airplane
+# aoneill - 11/27/15
+
+function _airplane() {
+  local cur prev
+  opts='on off'
+
+  COMPREPLY=()
+  cur=${COMP_WORDS[COMP_CWORD]}
+  prev=${COMP_WORDS[COMP_CWORD-1]}
+
+  if [[ "$COMP_CWORD" == "1" ]]
+  then
+    COMPREPLY=( $(compgen -W "$opts" -- "$cur") )
+    return 0
+  fi
+}
+complete -F _airplane airplane

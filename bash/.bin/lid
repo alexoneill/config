@@ -1,0 +1,43 @@
+#!/bin/bash
+# lid
+# aoneill - 01/04/16
+
+ignore="ignore"
+default="suspend"
+modes="ignore poweroff reboot halt kexec suspend hibernate hybrid-sleep lock"
+
+file=/etc/systemd/logind.conf
+
+function usage() {
+  echo "Usage: $0 [option]"
+  echo "  option: One of '$modes'"
+  exit
+}
+
+current=$(cat $file \
+  | grep "HandleLidSwitch=" \
+  | tail -n 1 \
+  | sed -e "s/HandleLidSwitch=//g")
+
+to=$default
+# If no args supplied, toggle between defaults
+if [[ "$#" == "0" ]]
+then
+  if [[ "$current" == "$default" ]]
+  then
+    to=$ignore
+  fi
+else
+  to=$1
+fi
+
+modeRegex="$(echo $modes | sed -e "s/ /|/g")"
+if [[ "$to" =~ $(echo ^\($modeRegex\)$) ]]
+then
+  echo "Changing lid handle to $to..."
+  sed -i.bak -e "s/#\\?HandleLidSwitch=.*/HandleLidSwitch=$to/g" $file
+  systemctl daemon-reexec
+else
+  echo "Error: Invalid lid action $to"
+  usage
+fi

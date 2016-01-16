@@ -1,0 +1,40 @@
+#!/bin/bash
+# airplane
+# aoneill - 11/26/15
+
+function usage() {
+  echo "Usage: $0 [on/off]"
+  exit
+}
+
+# Case on what to do
+interface=wlp3s0
+if (($# == 1))
+then
+  case "$1" in
+    "on")
+      ip link set $interface up
+      ;;
+
+    "off")
+      ip link set $interface down
+      ;;
+
+    *)
+      usage
+      ;;
+  esac
+fi
+
+# Automatically toggle state
+mode=$(ip link show $interface | head -n 1 \
+  | sed -e 's/.*state \(UP\|DOWN\).*/\1/g')
+case "$mode" in
+  "UP")
+    ip link set $interface down
+    ;;
+
+  "DOWN")
+    ip link set $interface up
+    ;;
+esac

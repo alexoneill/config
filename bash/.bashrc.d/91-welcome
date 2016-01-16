@@ -1,0 +1,17 @@
+#!/bin/bash
+# 91-welcome
+# aoneill - 11/26/15
+
+# Printing drive statistics
+# Laptop
+hostname | grep "Laptop" > /dev/null
+if [ $? -eq 0 ]; then
+  printDriveStats /dev/sda2 SSD
+fi
+
+# Desktop
+hostname | grep "Desktop" > /dev/null
+if [ $? -eq 0 ]; then
+  printDriveStats /dev/sda2 SDD
+  printDriveStats /dev/sdb2 HDD
+fi

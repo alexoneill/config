@@ -1,0 +1,48 @@
+#!/bin/bash
+# mac-util
+# aoneill - 11/27/15
+
+function usage() {
+  # Simple usage guidelines
+  echo "Usage: $0 [MAC Address]"
+  exit
+}
+
+# Require root access
+if [[ "$(whoami)" != "root" ]]
+then
+  echo "Error: Requires root privileges!"
+  exit
+fi
+
+# Get MAC address
+interface=wlp3s0
+curr_addr="$(ip link show $interface | grep "link/ether" \
+               | sed -e 's|^ \+link/ether \([0-9a-z:]\+\) brd .*|\1|g')"
+
+# Set the interface down
+ip link set $interface down
+
+if [[ "$#" == "0" ]]
+then
+  # Keep trying to find a valid MAC address
+  exit_code="-1"
+  while [[ "$exit_code" != "0" ]]
+  do
+    rand_addr="$(python -c "print ':'.join(map(lambda elem: '%02x' % elem, \
+      [__import__('random').randint(0, 255) for i in xrange(6)]))")"
+
+    # Try to set the address
+    ip link set $interface address $rand_addr 2>/dev/null
+    exit_code="$?"
+  done
+else
+  # Otherwise, set the address to something passed (check for validity)
+  rand_addr=$1
+  ! [[ "$rand_addr" =~ ^([a-fA-F0-9]{2}:){5}[a-zA-Z0-9]{2}$ ]] && usage
+  ip link set $interface address $rand_addr 2>/dev/null
+fi
+
+# Re-enable interface
+ip link set $interface up
+echo "Changed address from $curr_addr to $rand_addr"

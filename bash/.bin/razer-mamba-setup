@@ -1,0 +1,17 @@
+#!/bin/bash
+
+speed=7
+dockIDs=$(xinput | grep "Razer Razer Mamba Charging dock" | sed 's/.*id=//g' | sed 's/\t.*//g')
+cordedIDs=$(xinput | grep "Razer Razer Mamba" | sed 's/.*id=//g' | sed 's/\t.*//g')
+
+for id in $dockIDs
+do
+  echo Changing id=$id
+  xinput --set-prop $id "Device Accel Constant Deceleration" $speed
+done
+
+for id in $cordedIDs
+do
+  echo Changing id=$id
+  xinput --set-prop $id "Device Accel Constant Deceleration" $speed
+done

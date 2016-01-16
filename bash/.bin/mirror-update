@@ -1,0 +1,8 @@
+#!/bin/bash
+# mirror-update
+# aoneill - 10/08/15
+
+tmp=$(mktemp)
+curl -sk "https://www.archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4" | sed -e "s/^#Server/Server/g" > $tmp
+rankmirrors $tmp | tee /etc/pacman.d/mirrorlist
+rm $tmp

@@ -1,0 +1,33 @@
+#!/bin/bash
+# 20-alias
+# aoneill - 11/26/15
+
+# Aliases
+alias sudo="sudo -E"
+
+# Sudo shortcuts
+alias amount="sudo amount"
+alias aumount="sudo aumount"
+alias lid="sudo lid"
+alias netctl-auto="sudo netctl-auto"
+alias netctl-restart="sudo netctl-restart"
+alias pacman="sudo pacman"
+alias pacro="sudo pacro"
+alias systemctl="sudo systemctl"
+alias wifi-menu="sudo wifi-menu"
+alias wpa-scan="sudo wpa-scan"
+
+# Mapping
+alias cls="clear"
+alias net="netctl-auto"
+alias open="xdg-open"
+alias vi="vim"
+
+# Mapping with flags
+alias ls="ls --color"
+alias l="ls -a"
+alias la="ls -la"
+alias ll="ls -l"
+alias perms="stat -c '%a %n'"
+alias vdiff='diff --width=$(tput cols) -y'
+alias reload-udev="sudo udevadm control --reload-rules"

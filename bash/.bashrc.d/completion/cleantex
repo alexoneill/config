@@ -1,0 +1,6 @@
+#!/bin/bash
+# cleantex
+# aoneill - 11/27/15
+
+# Only match LaTeX files
+complete -fX '!*.tex' cleantex
