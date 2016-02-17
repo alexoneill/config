@@ -3,7 +3,7 @@
 # aoneill - 12/04/15
 
 interface=wlp3s0
-delay=30
+delay=2
 if (( $# > 0 ))
 then
   delay=$1

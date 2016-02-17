@@ -10,5 +10,5 @@ umask 0002
 # Source all the files in the extra's folder
 for file in $HOME/.bashrc.d/*
 do
-  [ -f $file ] && source $file
+  [ -f $file ] && [ -x $file ] && source $file
 done

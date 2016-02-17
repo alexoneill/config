@@ -59,6 +59,9 @@ function prompt_command {
 
   # Export proper coloring
   PS1="${HOST}:${DIR}$ "  
+
+  # Save history
+  history -a
 }
 
 PROMPT_COMMAND=prompt_command

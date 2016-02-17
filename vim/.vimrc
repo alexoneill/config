@@ -11,6 +11,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set textwidth=0
 
 "" Line numbering
 set nu
@@ -22,10 +23,13 @@ set hlsearch
 "" Set mouse functionality
 set mouse=a
 
+"" Spelling
+" set spell
+
 "" Functions
 " Highlighting, and toggle functionality
 highlight OverLength ctermbg=red ctermfg=white
-match OverLength /\%121v.\+/
+match OverLength /\%81v.\+/
 let w:long_match = 1
 
 " Toggle highlighting
