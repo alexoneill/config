@@ -1,1 +1,8 @@
+#  .gitignore
+#  aoneill - 02/17/16
+
+# Ignore history file
 .netrwhist
+
+# Ignore Vundle plugins
+bundle

@@ -1,12 +1,24 @@
 " .vimrc
 " aoneill - 12/05/15
 
-"" Stick with Vim, rather than Vi
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Vundle Configuration
 set nocompatible
+filetype off
+
+" Init Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end()
+filetype plugin indent on
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "" Indenttaion
 set autoindent
-filetype indent on
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -22,9 +34,6 @@ set hlsearch
 
 "" Set mouse functionality
 set mouse=a
-
-"" Spelling
-" set spell
 
 "" Functions
 " Highlighting, and toggle functionality
@@ -118,6 +127,7 @@ inoremap <S-Tab> <C-d>
 inoremap <Tab> <C-t>
 
 " Ignore Function Key presses in insert mode
+inoremap <F4> <NOP>
 inoremap <F5> <NOP>
 inoremap <F6> <NOP>
 inoremap <F7> <NOP>
