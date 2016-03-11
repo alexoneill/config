@@ -3,6 +3,3 @@
 
 # Ignore history file
 .netrwhist
-
-# Ignore Vundle plugins
-bundle

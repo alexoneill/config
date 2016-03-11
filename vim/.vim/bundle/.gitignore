@@ -1,0 +1,7 @@
+# .gitignore
+# aoneill - 03/11/16
+
+# Ignore most things
+*
+!.gitignore
+!Vundle.vim
