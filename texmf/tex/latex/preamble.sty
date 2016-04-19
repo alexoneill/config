@@ -1,0 +1,163 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{preamble}[2016/04/06 Preamble for Academic Documents]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Includes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Some math symbols
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+
+%% \Mundus!
+\RequirePackage{marvosym}
+
+%% Easy lists
+\RequirePackage{enumerate}
+
+%% Use the full page!
+\RequirePackage[left=.5in,right=.5in,top=.5in,bottom=.5in]{geometry}
+
+%% More environments!
+\RequirePackage{scrextend}
+
+%% Support for multiple columns of text
+\RequirePackage{multicol}
+
+%% Patterns and standards for the English Language
+\RequirePackage[english]{babel}
+
+%% Color!
+\RequirePackage[x11names, rgb, usenames, dvipsnames]{xcolor}
+
+%% Importing pictures
+\RequirePackage{graphicx}
+
+%% Code
+\RequirePackage{lmodern}
+\RequirePackage{listings}
+
+%% Conditionals
+\RequirePackage{etoolbox}
+
+%% Drawing diagrams
+\RequirePackage{tikz}
+
+%% End requires
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Use parts of the TiKz library
+\usetikzlibrary{snakes,arrows,shapes}
+
+%% Modify how paragraphs behave in LaTeX
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+
+%% No page numbers
+\pagestyle{empty}
+
+%% Code setup
+\newdimen\zzsize
+\zzsize=11pt
+\newdimen\kwsize
+\kwsize=11pt
+
+\newcommand{\basicstyle}{\fontsize{\zzsize}{1.1\zzsize}\ttfamily}
+\newcommand{\keywordstyle}{\fontsize{\kwsize}{1.1\kwsize}\normalfont\bf}
+\newlength{\zzlstwidth}
+\settowidth{\zzlstwidth}{{\basicstyle~}}
+\newcommand{\lcm}{}
+
+\lstset{
+  xleftmargin=5.0ex,
+  basewidth=\zzlstwidth,
+  basicstyle=\basicstyle,
+  captionpos=b,
+  numbers=left, numberstyle=\small, numbersep=8pt,
+  keywordstyle=\keywordstyle,
+  keywords={signature,sig,structure,struct,function,fun,fn,case,of,type,datatype,let,val,fn,in,end,as,functor,alloc,if,then,else,while,with,and,start,do},
+  commentstyle=\rmfamily\slshape,
+  morecomment=[l]{\%},
+  lineskip={1.5pt},
+  columns=[l]fullflexible,
+  keepspaces=true,
+  mathescape=true,
+  escapeinside={@}{@},
+%% NOTE: need TWO sets of braces around each definition below!
+  literate={requires}{{$\lcm\text{\keywordstyle \% requires}$}}6
+           {returns}{{$\lcm\text{\keywordstyle \% returns}$}}6
+           {=}{{$\lcm=$}}2
+%           {(}{{$($}}2 {)}{{$)$}}2
+           {**}{{$\lcm\times$}}2
+           {||}{{$\lcm\Vert$}}2
+           {|}{{\texttt{|}}}2
+           {=>}{{$\lcm\boldsymbol\Rightarrow$}}2
+           {->}{{$\lcm\rightarrow$}}2
+           {'a}{{$\alpha$}}1
+           {'b}{{$\beta$}}1
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Commands / Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For tasks
+\newcounter{subtasks}
+\newenvironment{task}[1]{
+  %% Reset sub-counts
+  \setcounter{subtasks}{0}
+  \textbf{#1}
+  \vspace{3pt}
+  \hrule height 1pt
+  \begin{indented}
+}{\end{indented}}
+
+% For parts in subtasks
+\def\indented#1{\list{}{}\item\relax}
+\let\indented=\endlist
+
+\newenvironment{subtask}[1][\alph{subtasks}] {
+  \addtocounter{subtasks}{1}
+  \begin{indented}
+    \textbf{#1)}
+}{\end{indented}}
+
+%% Useful commands
+\newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
+\newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
+\newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
+\newcommand{\IMG}[2]{\text{Im}_{#1}(#2)}
+\newcommand{\PIMG}[2]{\text{PreIm}_{#1}(#2)}
+\newcommand{\PR}[1]{\text{Pr\{}#1\text{\}}}
+\newcommand{\CPR}[2]{\text{Pr\{}#1\;|\;#2\text{\}}}
+\newcommand{\EV}[1]{ \text{E[}#1\text{]} }
+\newcommand{\CEV}[2]{\text{E[}#1\;|\;#2\text{]} }
+\newcommand{\PMF}[2]{\text{P}_{#1}(#2)}
+\newcommand{\JPMF}[4]{\text{P}_{#1, #2}(#3, #4)}
+\newcommand{\CPMF}[3]{\text{P}_{#1\;|\;#2}(#3)}
+\newcommand{\VAR}[1]{\text{Var}(#1)}
+\newcommand{\ZTRANS}[2]{\hat{#1}(#2)}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\OM}[0]{\Omega}
+\newcommand{\DER}[2]{\frac{d#1}{d#2}}
+\renewcommand{\TH}[0]{^\text{th}}
+
+%% Code
+\newcommand{\code}[1]{\texttt{\frenchspacing{#1}}}
+\renewcommand{\O}[1]{
+  \ifstrequal{#1}{(}{
+    \text{O}#1
+  }{
+    \text{O}(#1)
+  }
+}
+
+\endinput
