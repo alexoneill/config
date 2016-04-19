@@ -4,6 +4,7 @@
 
 # Exports
 export PATH=$HOME/.bin-git:$HOME/.bin-db:$PATH
+export TEXMFHOME=/home/aoneill/.env/git/texmf
 
 # Vim all the way!
 export GIT_EDITOR=vim
