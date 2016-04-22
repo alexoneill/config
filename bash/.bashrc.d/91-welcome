@@ -6,7 +6,7 @@
 # Laptop
 hostname | grep "Laptop" > /dev/null
 if [ $? -eq 0 ]; then
-  printDriveStats /dev/sda2 SSD
+  printDriveStats /dev/sda3 SSD
 fi
 
 # Desktop

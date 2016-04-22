@@ -79,7 +79,7 @@ function InsertUpdateHeader()
 
   " Delete header if it matches
   let l:match = matchstr(getline(l:root_line + 1), l:author_date_regex)
-  if getline(l:root_line) == l:filename && strlen(l:match) > 0
+  if strlen(l:match) > 0
     if getline(l:root_line + 2) == ''
       execute "normal! mt"
       silent execute "normal! " . l:root_line . "gg3dd"
