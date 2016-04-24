@@ -40,6 +40,8 @@ known=( $(find * -maxdepth 1 -name "${base}.*" -not -name "${base}.pdf") \
 
 # Compile and restore files
 pdflatex -halt-on-error --enable-pipes --shell-escape $file
+err=$?
+
 tempd=$(mktemp -d)
 mv ${known[@]} $tempd
 rm ${base}.*
@@ -47,5 +49,7 @@ mv $tempd/* .
 rm -rf $tempd
 
 # Handle errors and visualize
-[ "$?" == "1" ] && echo "Compilation fault!" && exit
+[ "$err" == "1" ] && echo "Compilation fault!" && exit 1
 [ "$viz" == "1" ] && xdg-open $base.pdf
+
+exit 0
