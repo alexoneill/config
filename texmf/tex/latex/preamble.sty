@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
 \ProvidesPackage{preamble}[2016/04/06 Preamble for Academic Documents]
 
+%% Incorporate http://tex.stackexchange.com/questions/41408/a-five-level-deep-list
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Includes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,7 +20,7 @@
 \RequirePackage{enumerate}
 
 %% Use the full page!
-\RequirePackage[left=.5in,right=.5in,top=.5in,bottom=.5in]{geometry}
+\RequirePackage[left=0.5in,right=0.5in,top=0.5in,bottom=0.5in]{geometry}
 
 %% More environments!
 \RequirePackage{scrextend}
@@ -128,26 +130,37 @@
     \textbf{#1)}
 }{\end{indented}}
 
+%% Math operators
+\DeclareMathOperator*{\argmax}{ARG\,MAX}
+\DeclareMathOperator*{\argmin}{ARG\,MIN}
+
 %% Useful commands
+\newcommand{\given}[0]{\;|\;}
 \newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
 \newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
 \newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
 \newcommand{\IMG}[2]{\text{Im}_{#1}(#2)}
 \newcommand{\PIMG}[2]{\text{PreIm}_{#1}(#2)}
 \newcommand{\PR}[1]{\text{Pr\{}#1\text{\}}}
-\newcommand{\CPR}[2]{\text{Pr\{}#1\;|\;#2\text{\}}}
-\newcommand{\EV}[1]{ \text{E[}#1\text{]} }
-\newcommand{\CEV}[2]{\text{E[}#1\;|\;#2\text{]} }
-\newcommand{\PMF}[2]{\text{P}_{#1}(#2)}
+\newcommand{\CPR}[2]{\text{Pr\{}#1 \given #2\text{\}}}
+\newcommand{\EV}[1]{\text{E[}#1\text{]}}
+\newcommand{\CEV}[2]{\text{E[}#1 \given #2\text{]} }
+\newcommand{\PMF}[2]{\text{f}_{#1}(#2)}
+\newcommand{\PDF}[2]{\text{F}_{#1}(#2)}
 \newcommand{\JPMF}[4]{\text{P}_{#1, #2}(#3, #4)}
-\newcommand{\CPMF}[3]{\text{P}_{#1\;|\;#2}(#3)}
+\newcommand{\CPMF}[3]{\text{P}_{#1 \given #2}(#3)}
 \newcommand{\VAR}[1]{\text{Var}(#1)}
+\newcommand{\COV}[2]{\text{Cov}(#1, #2)}
+\newcommand{\CORR}[2]{\text{Corr}(#1, #2)}
 \newcommand{\ZTRANS}[2]{\hat{#1}(#2)}
 \newcommand{\N}[0]{\mathbb{N}}
 \newcommand{\Z}[0]{\mathbb{Z}}
 \newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\F}[0]{\mathbb{F}}
 \newcommand{\OM}[0]{\Omega}
 \newcommand{\DER}[2]{\frac{d#1}{d#2}}
+\newcommand{\DET}[1]{\text{det}\left(#1\right)}
 \renewcommand{\TH}[0]{^\text{th}}
 
 %% Code
@@ -158,6 +171,15 @@
   }{
     \text{O}(#1)
   }
+}
+
+%% Standard header
+\newcommand{\header}[0]{
+  \textbf{\name} (\andrew) \hfill  \textbf{\assignment}\\
+  \ifdefempty{\recitation}{}{Section: \recitation}
+  \hfill  \today\\
+  \ifdefempty{\collab}{}{Collaborators: \collab\\}
+  \vspace{10pt}
 }
 
 \endinput

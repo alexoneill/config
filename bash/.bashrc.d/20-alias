@@ -8,6 +8,7 @@ alias sudo="sudo -E"
 # Sudo shortcuts
 alias amount="sudo amount"
 alias aumount="sudo aumount"
+alias journalctl="sudo journalctl"
 alias lid="sudo lid"
 alias netctl-auto="sudo netctl-auto"
 alias netctl-restart="sudo netctl-restart"

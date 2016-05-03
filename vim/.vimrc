@@ -32,8 +32,11 @@ set nu
 set incsearch
 set hlsearch
 
+"" Set scroll context
+set so=5
+
 "" Set mouse functionality
-set mouse=a
+"set mouse=a
 
 "" Functions
 " Highlighting, and toggle functionality
@@ -110,12 +113,14 @@ nmap <F4> :call InsertUpdateHeader()<CR>
 "" Extra Normal Mode functionality
 nmap D dd
 nmap X @x
+" Ignore Ex mode
+noremap Q <NOP>
 
 " Reverse J
 nmap S i<Enter><Esc>k$
 
 " Split line at 80, move to next line
-nmap O 81<Bar>F<Space>Sj$
+nmap O 81<Bar>BSj$
 
 " Tab and Shift-Tab for code
 nnoremap <S-Tab> <<
@@ -126,7 +131,18 @@ nnoremap <Tab> >>
 inoremap <S-Tab> <C-d>
 inoremap <Tab> <C-t>
 
+" Learn, damnit!
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+
 " Ignore Function Key presses in insert mode
+inoremap <F1> <NOP>
 inoremap <F4> <NOP>
 inoremap <F5> <NOP>
 inoremap <F6> <NOP>

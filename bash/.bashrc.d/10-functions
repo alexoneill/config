@@ -32,6 +32,9 @@ function title() { echo -e "\e]0;$@\a"; }
 # Quick helper for error messages
 function error() { echo -e "${BLD_RED}$@${BLD_RST}"; }
 
+# Strip colors from output
+function cstrip() { sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"; }
+
 # Special Latex compiler, for use with DFA's in LaTeX
 function dfatex() {
   latex -halt-on-error "$1" &&\
