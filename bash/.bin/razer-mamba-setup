@@ -1,6 +1,11 @@
 #!/bin/bash
 
 speed=7
+if [[ "$1" != "" ]]
+then
+  speed=$1
+fi
+
 dockIDs=$(xinput | grep "Razer Razer Mamba Charging dock" | sed 's/.*id=//g' | sed 's/\t.*//g')
 cordedIDs=$(xinput | grep "Razer Razer Mamba" | sed 's/.*id=//g' | sed 's/\t.*//g')
 
