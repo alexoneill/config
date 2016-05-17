@@ -29,7 +29,7 @@ then
   exit_code="-1"
   while [[ "$exit_code" != "0" ]]
   do
-    rand_addr="$(python -c "print ':'.join(map(lambda elem: '%02x' % elem, \
+    rand_addr="$(python2 -c "print ':'.join(map(lambda elem: '%02x' % elem, \
       [__import__('random').randint(0, 255) for i in xrange(6)]))")"
 
     # Try to set the address
