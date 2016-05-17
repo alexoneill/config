@@ -2,21 +2,44 @@
 # aumount
 # aoneill - 10/08/15
 
+mnt="/mnt"
+
 # Ensure root access
-if [[ $(whoami) != "root" ]]
-then
+if [[ $(whoami) != "root" ]]; then
   echo "Error: Mounting requires root access!"
   exit
 fi
 
-# Check that something is mounted on /mnt
-mounted=$(mount | grep "on /mnt")
-if [[ "$mounted" == "" ]]
-then
-  echo "Error: No device mounted on /mnt!"
+# Get candidate devices
+devs=$(mktemp)
+lsblk -npJlo name,type,mountpoint,label \
+  | grep "\"mountpoint\": \"$mnt" \
+  | sed -e 's/null/""/g' \
+  | sed -e 's/.*"name": "\([^"]*\)",.*"mountpoint": "\([^"]*\)".*/\1 \2/g' \
+    > $devs
+
+if [[ "$(wc -l $devs | awk -e '{print $1;}')" == "0" ]]; then
+  echo "Error: Nothing mounted!"
   exit
 fi
-  
+
+# Display a menu to choose device
+exec 3>&1
+out=$(eval "dialog --title \"umount $@\" --menu \"Device:\" 14 40 7 \
+        $(cat $devs | awk -e '{printf "%d \"%s\" ", NR, $0}')" 2>&1 1>&3)
+exec 3>&-
+
+# Make sure something was chosen
+clear
+[[ "$out" == "" ]] && exit
+
+# Lookup device
+device=$(sed -e "${out}q;d" $devs)
+rm $devs
+
+dev=$(echo $device | awk -e '{print $1;}')
+mountpoint=$(echo $device | awk -e '{$1 = ""; print $0;}' | sed -e "s/^\s//g")
+
 # Unmount it!
-umount /mnt && \
-  echo "Unmounted $(echo $mounted | awk -e '{print $1;}') from /mnt."
+umount $@ $dev && rm -rf "$(echo "$mountpoint" | sed -e "s| |\\ |g")" \
+  && echo "Unmounted $dev from $mountpoint."

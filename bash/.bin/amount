@@ -2,13 +2,7 @@
 # amount
 # aoneill - 10/08/15
 
-# Ensure nothing is mounted
-mounted=$(mount | grep "on /mnt")
-if [[ "$mounted" != "" ]]
-then
-  echo "Erorr: $(echo $mounted | awk -e '{print $1};') already mounted on /mnt!"
-  exit
-fi
+mnt="/mnt"
 
 # Enaure root access
 if [[ $(whoami) != "root" ]]
@@ -27,7 +21,7 @@ lsblk -npJlo name,type,mountpoint,label \
 
 # Display a menu to choose device
 exec 3>&1
-out=$(eval "dialog --title \"Auto mount\" --menu \"Mount point:\" 14 40 7 \
+out=$(eval "dialog --title \"mount $@\" --menu \"Device:\" 14 40 7 \
         $(cat $devs | awk -e '{printf "%d \"%s\" ", NR, $0}')" 2>&1 1>&3)
 exec 3>&-
 
@@ -39,6 +33,20 @@ clear
 device=$(sed -e "${out}q;d" $devs)
 rm $devs
 
+dev=$(echo $device | awk -e '{print $1;}')
+label=$(echo $device | awk -e '{$1 = ""; print $0;}' | sed -e "s/^\s//g")
+
+if [[ "$label" == "" ]]; then
+  label="$(echo $dev | awk -F'/' '{print $NF}' | tr '[:lower:]' '[:upper:]')"
+fi
+
+if [[ -d "$mnt/$label" ]]; then
+  label=$(mktemp --tmpdir="$mnt" -d "$label.XXX")
+else
+  label="$mnt/$label"
+fi
+
+mkdir -p "$label"
+
 # Mount with passed flags
-mount $@ $(echo $device | awk -e '{print $1;}') /mnt && \
-  echo "Mounted $(echo $device | awk -e '{print $1;}') on /mnt."
+mount $@ $dev "$label" && echo "Mounted $dev on $label."
