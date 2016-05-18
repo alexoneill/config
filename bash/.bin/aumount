@@ -23,15 +23,19 @@ if [[ "$(wc -l $devs | awk -e '{print $1;}')" == "0" ]]; then
   exit
 fi
 
-# Display a menu to choose device
-exec 3>&1
-out=$(eval "dialog --title \"umount $@\" --menu \"Device:\" 14 40 7 \
-        $(cat $devs | awk -e '{printf "%d \"%s\" ", NR, $0}')" 2>&1 1>&3)
-exec 3>&-
+if [[ "$(wc -l $devs |  awk -e '{print $1;}')" != "1" ]]; then
+  # Display a menu to choose device
+  exec 3>&1
+  out=$(eval "dialog --title \"umount $@\" --menu \"Device:\" 14 40 7 \
+          $(cat $devs | awk -e '{printf "%d \"%s\" ", NR, $0}')" 2>&1 1>&3)
+  exec 3>&-
 
-# Make sure something was chosen
-clear
-[[ "$out" == "" ]] && exit
+  # Make sure something was chosen
+  clear
+  [[ "$out" == "" ]] && exit
+else
+  out="1"
+fi
 
 # Lookup device
 device=$(sed -e "${out}q;d" $devs)
