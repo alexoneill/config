@@ -1,0 +1,100 @@
+#!/usr/bin/python
+#  regex
+#  aoneill - 05/19/16
+
+import os
+import re
+import argparse
+import glob
+
+def main(args):
+  print 'Files:'
+  for f in args.file:
+    print '  ', f
+
+  # Get a suitable filter
+  while(True):
+    if(args.filter == ''):
+      try:
+        args.filter = raw_input('Filter: ')
+      except KeyboardInterrupt, EOFError:
+        print
+        return
+
+    if(args.filter != ''):
+      args.file = filter(lambda path:
+                     re.match(args.filter, os.path.basename(path)) 
+                       is not None, args.file) 
+    else:
+      break
+
+    # Probably a mistake
+    if(len(args.file) == 0):
+      print 'Oops!'
+      args.filter = ''
+    else:
+      print 'Filtered:'
+      for f in args.file:
+        print '  ', f
+      break
+
+
+  # Request missing information
+  if(args.replace == ''):
+    try:
+      args.replace = raw_input('Replace: ')
+    except KeyboardInterrupt, EOFError:
+      print
+      return
+  
+  # Request missing information
+  if(args.__dict__['with'] == ''):
+    try:
+      args.__dict__['with'] = raw_input('With: ')
+    except KeyboardInterrupt, EOFError:
+      print
+      return
+
+  # Produce proposed changes
+  print 'Proposed Changes:'
+  mapping = []
+
+  # Pretty printing
+  pps = '  %%%ds -> %%s' % max(map(len, args.file))
+  for f in args.file:
+    fold = os.path.dirname(f)
+    f = os.path.basename(f)
+
+    # Mapping
+    elem = (os.path.join(fold, f), 
+            os.path.join(fold, re.sub(args.replace, args.__dict__['with'], f)))
+    mapping.append(elem)
+    print pps % elem
+
+  # Confirm
+  try:
+    if(not args.no_confirm and raw_input('Continue? (y/n) ') != 'y'):
+      return
+  except KeyboardInterrupt, EOFError:
+    print
+    return
+
+  # Rename files
+  for (orig, new) in mapping:
+    os.rename(orig, new)
+
+if(__name__ == '__main__'):
+  parser = argparse.ArgumentParser()
+  parser.add_argument('-n', '--no-confirm', 
+    default = False, action = 'store_true', help = 'Disable confirmation step')
+  parser.add_argument('-f', '--filter', 
+    default = '', help = 'Use the regex to filter the supplied items')
+  parser.add_argument('-r', '--replace',
+    default = '', help = 'Use the regex as applied to the items')
+  parser.add_argument('-w', '--with',
+    default = '', help = 'Use the regex to replace matches')
+  parser.add_argument('file', default = '', nargs = '+',
+    help = 'Files or directories to rename')
+
+  args = parser.parse_args()
+  main(args)
