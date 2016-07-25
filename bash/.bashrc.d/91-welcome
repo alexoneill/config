@@ -15,3 +15,11 @@ if [ $? -eq 0 ]; then
   printDriveStats /dev/sda2 SDD
   printDriveStats /dev/sdb2 HDD
 fi
+
+# Notify about unsaved changes
+cd ~/.env/git
+if [[ "$(git status | grep "nothing to commit")" == "" ]]; then
+  echo -e "\n${BLD_RED}WARNING${TXT_RST}: Uncommitted changes in ~/.env/git"
+  echo -e "Update with \`env-push'"
+fi
+cd ~

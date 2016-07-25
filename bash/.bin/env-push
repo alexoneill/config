@@ -3,10 +3,13 @@
 # aoneill - 07/24/16
 
 CWD=$(pwd)
-
 cd ~/.env/git
+
 git add -A
-git commit -a
-git push
+git commit --verbose -a
+
+if [[ "$?" == "0" ]]; then
+  git push
+fi
 
 cd "$CWD"
