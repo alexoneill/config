@@ -1,0 +1,10 @@
+#!/bin/bash
+# env-update
+# aoneill - 07/24/16
+
+CWD=$(pwd)
+
+cd ~/.env/git
+git pull
+
+cd "$CWD"

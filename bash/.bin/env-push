@@ -1,0 +1,12 @@
+#!/bin/bash
+# env-update
+# aoneill - 07/24/16
+
+CWD=$(pwd)
+
+cd ~/.env/git
+git add -A
+git commit -a
+git push
+
+cd "$CWD"
