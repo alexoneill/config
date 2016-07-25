@@ -38,6 +38,14 @@ set so=5
 "" Set mouse functionality
 "set mouse=a
 
+"" Return to the last position in the file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Spelling
+set spell
+
 "" Functions
 " Highlighting, and toggle functionality
 highlight OverLength ctermbg=red ctermfg=white
@@ -120,7 +128,7 @@ noremap Q <NOP>
 nmap S i<Enter><Esc>k$
 
 " Split line at 80, move to next line
-nmap O 81<Bar>BSj$
+nmap O 81<Bar>BhSj$
 
 " Tab and Shift-Tab for code
 nnoremap <S-Tab> <<

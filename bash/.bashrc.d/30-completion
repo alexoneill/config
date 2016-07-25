@@ -5,5 +5,5 @@
 # Source all the known completion files
 for file in $HOME/.bashrc.d/completion/* 
 do
-  [ -f $file ] && source $file
+  [ -x $file ] && source $file
 done
