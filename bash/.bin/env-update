@@ -5,6 +5,8 @@
 CWD=$(pwd)
 
 cd ~/.env/git
-git pull
+success=0
+git pull | grep "Already up-to-date." && success=1
 
 cd "$CWD"
+exit $success
