@@ -6,6 +6,7 @@
 alias sudo="sudo -E"
 
 # Sudo shortcuts
+alias airplane="sudo airplane"
 alias amount="sudo amount"
 alias aumount="sudo aumount"
 alias journalctl="sudo journalctl"
@@ -33,3 +34,29 @@ alias perms="stat -c '%a %n'"
 alias psgrep="ps aux | grep"
 alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
+
+## Shortcuts
+# Git
+alias gst="git status"
+alias gstat="gst"
+alias st="gst"
+alias pending="gst"
+alias p="gst"
+
+alias gci="git commit"
+alias gcommit="gci"
+alias ci="gci"
+
+alias gbr="git branch"
+alias gbranch="gbr"
+alias br="gbr"
+
+alias gco="git checkout"
+alias gcheckout="git checkout"
+alias co="gco"
+
+alias gdiff="git diff"
+
+alias gph="git push"
+alias gpush="gph"
+alias push="gph"

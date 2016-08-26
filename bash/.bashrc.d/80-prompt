@@ -8,11 +8,11 @@ function prompt_command {
   git branch &>/dev/null;
   if [ "$?" -eq 0 ]
   then
-    git status | grep "nothing to commit" > /dev/null 2>&1;
+    git status | grep "nothing to commit" &>/dev/null;
 
     # Changed files
     if [ "$?" -eq "0" ]; then
-      git cherry -v | grep "+" > /dev/null 2>&1;
+      git cherry -v 2>/dev/null | grep "+" &>/dev/null;
       
       # Uncommitted Changes
       if [ "$?" -eq "0" ]; then
@@ -26,12 +26,12 @@ function prompt_command {
 
     # Finding highest directory that has no git
     curPath="$(pwd)"
-    find . -maxdepth 1 -type d | grep ".git$" > /dev/null 2>&1;
+    find . -maxdepth 1 -type d | grep ".git$" &>/dev/null;
     if [ $? -ne 0 ]; then
       while [ "$(pwd)" != "/" ]; do
         cd ..
 
-        find . -maxdepth 1 -type d | grep ".git$" > /dev/null 2>&1;
+        find . -maxdepth 1 -type d | grep ".git$" &>/dev/null;
         if [ $? -eq 0 ]; then
           cd ..
           break

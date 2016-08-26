@@ -1,0 +1,14 @@
+#!/bin/bash
+# env-status
+# aoneill - 08/23/16
+
+VISUAL="0"
+[[ "$#" == "1" ]] && [[ "$1" == "-v" || "$1" == "--visual" ]] && VISUAL="1"
+
+status="1"
+cd ~/.env/git
+
+internet && [[ -n "$(git fetch --dry-run)" ]] && status="0"
+
+(( VISUAL )) && echo "$status"
+(( ! VISUAL )) && exit "$status"

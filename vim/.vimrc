@@ -39,8 +39,8 @@ set so=5
 "set mouse=a
 
 "" Return to the last position in the file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+if !exists('nojump') && has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
 endif
 
 " Spelling

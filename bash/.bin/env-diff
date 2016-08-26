@@ -1,0 +1,14 @@
+#!/bin/bash
+# env-status
+# aoneill - 08/23/16
+
+QUIET="0"
+[[ "$#" == "1" ]] && [[ "$1" == "-q" || "$1" == "--quiet" ]] && QUIET="1"
+
+cd ~/.env/git
+tmp="$(mktemp)"
+git diff --color=always > "$tmp"
+
+(( ! QUIET )) && less -R "$tmp"
+status="$(test -n "$(cat "$tmp")"; echo "$?")"
+exit $status

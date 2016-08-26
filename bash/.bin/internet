@@ -1,0 +1,13 @@
+#!/bin/bash
+# internet
+# aoneill - 08/18/16
+
+VISUAL="0"
+[[ "$#" == "1" ]] && [[ "$1" == "-v" || "$1" == "--visual" ]] && VISUAL="1"
+
+status="0"
+ping -W 3 -c 1 8.8.8.8 &>/dev/null
+[[ "$?" != "0" ]] && status="1"
+
+(( VISUAL )) && echo "$status"
+(( ! VISUAL )) && exit "$status"

@@ -9,21 +9,21 @@ function usage() {
 
 # Case on what to do
 interface=wlp3s0
-if (($# == 1))
-then
+if (($# == 1)); then
   case "$1" in
     "on")
-      ip link set $interface up
+      ip link set $interface down
       ;;
 
     "off")
-      ip link set $interface down
+      ip link set $interface up
       ;;
 
     *)
       usage
       ;;
   esac
+  exit
 fi
 
 # Automatically toggle state

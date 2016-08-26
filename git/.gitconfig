@@ -3,10 +3,19 @@
 	email = oneill.alexander.b@gmail.com
 
 [alias]
+  # Shortcuts
   st = status
   ci = commit
   br = branch
   co = checkout
 
+  # Aliases
+  pending = status
+  p = status
+
 [push]
 	default = simple
+
+[core]
+	editor = vim --cmd 'let nojump=1'
+	whitespace = trailing-space,tab-in-indent
