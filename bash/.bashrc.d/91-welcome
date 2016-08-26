@@ -17,9 +17,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # Notify about unsaved changes
-cd ~/.env/git
-if [[ "$(git status | grep "nothing to commit")" == "" ]]; then
+if env-diff --quiet; then
   echo -e "\n${BLD_RED}WARNING${TXT_RST}: Uncommitted changes in ~/.env/git"
   echo -e "Update with \`env-push'"
 fi
-cd ~
