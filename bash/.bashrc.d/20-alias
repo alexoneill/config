@@ -37,6 +37,8 @@ alias reload-udev="sudo udevadm control --reload-rules"
 
 ## Shortcuts
 # Git
+alias g="git"
+
 alias gst="git status"
 alias gstat="gst"
 alias st="gst"
