@@ -44,6 +44,9 @@
 %% Conditionals
 \RequirePackage{etoolbox}
 
+%% Key Value pairs
+\RequirePackage{keyval}
+
 %% Drawing diagrams
 \RequirePackage{tikz}
 
@@ -130,12 +133,36 @@
     \textbf{#1)}
 }{\end{indented}}
 
+% For Narrow sections
+\makeatletter
+\define@key{setpar}{left}[0pt]{\leftmargin=#1}
+\define@key{setpar}{right}[0pt]{\rightmargin=#1}
+\define@key{setpar}{both}{\leftmargin=#1\relax\rightmargin=#1}
+\makeatother
+
+\newenvironment{narrow}[1][]
+  {\list{}{\setkeys{setpar}{left,right}%
+     \setkeys{setpar}{#1}%
+     \listparindent=\parindent
+     \topsep=0pt
+     \partopsep=0pt
+     \parsep=\parskip}\item\relax\hspace*{\listparindent}\ignorespaces}
+  {\endlist}
+
+% Shortcut
+\newcommand{\problem}[1] {
+  \begin{narrow}[left=1cm,right=1cm]
+    \textit{#1}
+  \end{narrow}
+}
+
 %% Math operators
 \DeclareMathOperator*{\argmax}{ARG\,MAX}
 \DeclareMathOperator*{\argmin}{ARG\,MIN}
 
 %% Useful commands
 \newcommand{\given}[0]{\;|\;}
+\newcommand{\squiggle}[1]{\widetilde{#1}}
 \newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
 \newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
 \newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
