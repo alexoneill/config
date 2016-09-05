@@ -21,8 +21,10 @@ alias wpa-scan="sudo wpa-scan"
 
 # Mapping
 alias cls="clear"
+alias g="git"
 alias net="netctl-auto"
 alias open="xdg-open"
+alias py="python"
 alias vi="vim"
 
 # Mapping with flags
@@ -36,9 +38,6 @@ alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
 
 ## Shortcuts
-# Git
-alias g="git"
-
 alias gst="git status"
 alias gstat="gst"
 alias st="gst"
