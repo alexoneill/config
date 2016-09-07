@@ -45,6 +45,9 @@ endif
 
 " Spelling
 set spell
+hi clear SpellBad
+hi SpellBad cterm=underline
+
 
 "" Functions
 " Highlighting, and toggle functionality
