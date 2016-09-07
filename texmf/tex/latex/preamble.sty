@@ -47,6 +47,9 @@
 %% Key Value pairs
 \RequirePackage{keyval}
 
+%% For Blank pages
+\RequirePackage{afterpage}
+
 %% Drawing diagrams
 \RequirePackage{tikz}
 
@@ -155,6 +158,16 @@
     \textit{#1}
   \end{narrow}
 }
+
+% Blank page
+\newcommand\emptypage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+% Shortcut
+\newcommand{\blankpage}[0]{\afterpage{\emptypage}}
 
 %% Math operators
 \DeclareMathOperator*{\argmax}{ARG\,MAX}
