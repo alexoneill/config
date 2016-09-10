@@ -48,7 +48,6 @@ set spell
 hi clear SpellBad
 hi SpellBad cterm=underline
 
-
 "" Functions
 " Highlighting, and toggle functionality
 highlight OverLength ctermbg=red ctermfg=white
@@ -171,6 +170,10 @@ inoremap <F15> <NOP>
 " Tab and Shift-Tab for code
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
+
+"" Autocmds
+" Strip white space on write
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Syntax
 syntax on
