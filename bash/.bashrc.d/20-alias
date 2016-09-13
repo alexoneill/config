@@ -19,6 +19,9 @@ alias systemctl="sudo systemctl"
 alias wifi-menu="sudo wifi-menu"
 alias wpa-scan="sudo wpa-scan"
 
+# Replacement
+alias python="ipython"
+
 # Mapping
 alias cls="clear"
 alias g="git"

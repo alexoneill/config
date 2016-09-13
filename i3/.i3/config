@@ -165,6 +165,7 @@ bar {
 
 # Restore the desktop background using nitrogen
 exec --no-startup-id i3-wallpaper
+bindsym XF86Explorer exec --no-startup-id i3-wallpaper
 
 # Start the Dropbox daemon
 exec --no-startup-id dropbox
@@ -175,10 +176,10 @@ exec --no-startup-id pulseaudio
 # Enable volume controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 2%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer sset Master 2%-
-bindsym XF86AudioMute exec --no-startup-id amixer sset Master 1+ toggle
+bindsym XF86AudioMute        exec --no-startup-id amixer sset Master 1+ toggle
 
 # Enable Brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 
 # Fix Middle-button paste
