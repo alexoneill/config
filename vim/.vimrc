@@ -47,6 +47,8 @@ endif
 set spell
 hi clear SpellBad
 hi SpellBad cterm=underline
+hi clear SpellCap
+hi SpellCap cterm=underline
 
 "" Functions
 " Highlighting, and toggle functionality
@@ -101,7 +103,7 @@ function InsertUpdateHeader()
       endtry
     endif
   endif
-  
+
   " Plae new header, clear call from commandline
   call append(l:root_line - 1, [l:filename, l:author_date, ''])
   echo ""
