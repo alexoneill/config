@@ -13,7 +13,7 @@ function prompt_command {
     # Changed files
     if [ "$?" -eq "0" ]; then
       git cherry -v 2>/dev/null | grep "+" &>/dev/null;
-      
+
       # Uncommitted Changes
       if [ "$?" -eq "0" ]; then
         GIT=$BLD_PUR
@@ -40,14 +40,14 @@ function prompt_command {
     else
       cd ..
     fi
-   
+
     # Go back to the current directory
     nonGit="$(pwd)"
     cd "$curPath"
 
     if [[ "$nonGit" == "/" ]]
     then
-      nonGit= 
+      nonGit=
       gitPath="$(echo "$curPath" | sed "s|^$HOME|~|")"
     else
       # Path to Git folder
@@ -62,7 +62,7 @@ function prompt_command {
   fi
 
   # Export proper coloring
-  PS1="${HOST}:${DIR}$ "  
+  PS1="${HOST}:${DIR}$ "
 
   # Save history
   history -a
