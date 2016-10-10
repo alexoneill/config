@@ -175,14 +175,13 @@
 
 %% Useful commands
 \newcommand{\given}[0]{\;|\;}
-\newcommand{\squiggle}[1]{\widetilde{#1}}
 \newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
 \newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
 \newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
 \newcommand{\IMG}[2]{\text{Im}_{#1}(#2)}
 \newcommand{\PIMG}[2]{\text{PreIm}_{#1}(#2)}
-\newcommand{\PR}[1]{\text{Pr\{}#1\text{\}}}
-\newcommand{\CPR}[2]{\text{Pr\{}#1 \given #2\text{\}}}
+\newcommand{\PR}[1]{\text{Pr(}#1\text{)}}
+\newcommand{\CPR}[2]{\text{Pr(}#1 \given #2\text{)}}
 \newcommand{\EV}[1]{\text{E[}#1\text{]}}
 \newcommand{\CEV}[2]{\text{E[}#1 \given #2\text{]} }
 \newcommand{\PMF}[2]{\text{f}_{#1}(#2)}
@@ -203,8 +202,21 @@
 \newcommand{\OM}[0]{\Omega}
 \newcommand{\DER}[2]{\frac{d#1}{d#2}}
 \newcommand{\DET}[1]{\text{det}\left(#1\right)}
+\newcommand{\POLYRD}{\leq_p}
 \renewcommand{\P}[0]{\mathbb{P}}
 \renewcommand{\TH}[0]{^\text{th}}
+
+%% Finance, Stochastic Calculus
+\newcommand{\squiggle}[1]{\widetilde{#1}}
+
+\newcommand{\SPR}[1]{\squiggle{\mathbb{P}}\text{(}#1\text{)}}
+\newcommand{\NSPR}[1]{\mathbb{P}\text{(}#1\text{)}}
+
+\newcommand{\SEV}[1]{\squiggle{\mathbb{E}}\text{[}#1\text{]}}
+\newcommand{\NSEV}[1]{\mathbb{E}\text{[}#1\text{]}}
+
+\newcommand{\CSEV}[2]{\squiggle{\mathbb{E}}\text{[}#1 \given #2\text{]}}
+\newcommand{\NCSEV}[2]{\mathbb{E}\text{[}#1 \given #2\text{]}}
 
 %% Code
 \newcommand{\code}[1]{\texttt{\frenchspacing{#1}}}
