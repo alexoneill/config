@@ -2,6 +2,8 @@
 # 91-welcome
 # aoneill - 11/26/15
 
+! [ -t 0 ] && return;
+
 # Printing drive statistics
 # Laptop
 hostname | grep "Laptop" > /dev/null

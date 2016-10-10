@@ -1,6 +1,6 @@
 [user]
 	name = Alex O'Neill
-	email = oneill.alexander.b@gmail.com
+	email = git@aoneill.me
 
 [alias]
   # Shortcuts
@@ -12,6 +12,9 @@
   # Aliases
   pending = status
   p = status
+
+[diff]
+  color = always
 
 [push]
 	default = simple
