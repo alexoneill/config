@@ -35,7 +35,6 @@ alias ls="ls --color"
 alias l="ls -a"
 alias la="ls -la"
 alias ll="ls -l"
-alias makeup="make -C .."
 alias perms="stat -c '%a %n'"
 alias psgrep="ps aux | grep"
 alias vdiff='diff --width=$(tput cols) -y'

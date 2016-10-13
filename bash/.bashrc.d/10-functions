@@ -50,3 +50,19 @@ function rainbow() {
     sleep .01
   done
 }
+
+# Go up until a makefile is found, then run make
+function makeup() {
+  backup="$OLDPWD"
+  current="$(pwd)"
+
+  while [[ ! -f Makefile ]] && [[ "$(pwd)" != "/" ]]; do
+    cd ..
+  done;
+
+  dir="$(pwd)"
+  cd "$current"
+  export OLDPWD="$backup"
+
+  [[ -f "$dir/Makefile" ]] && make -C "$dir" $@
+}
