@@ -17,7 +17,10 @@ call vundle#end()
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"" Indenttaion
+"" Backspace
+set backspace=indent,eol,start
+
+"" Indentation
 set autoindent
 set tabstop=2
 set shiftwidth=2
