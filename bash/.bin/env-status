@@ -2,13 +2,36 @@
 # env-status
 # aoneill - 08/23/16
 
-VISUAL="0"
-[[ "$#" == "1" ]] && [[ "$1" == "-v" || "$1" == "--visual" ]] && VISUAL="1"
+VISUAL=0
+PULL=1
+
+while [[ ${1:0:1} == - ]]; do
+  term="$1"
+  case "$term" in
+    -p|--pull)
+      export PUSH=0
+      ;;
+
+    -h|--push)
+      export PUSH=1
+      ;;
+
+    -v|--visual)
+      export VISUAL=1
+      ;;
+
+    *)
+      ;;
+  esac
+
+  shift 1
+done
 
 status="1"
 cd ~/.env/git
 
-internet && [[ -n "$(git fetch --dry-run)" ]] && status="0"
+(( PUSH )) && env-diff --quiet && status="0"
+(( ! PULL )) && internet && [[ -n "$(git fetch --dry-run)" ]] && status="0"
 
 (( VISUAL )) && echo "$status"
 (( ! VISUAL )) && exit "$status"

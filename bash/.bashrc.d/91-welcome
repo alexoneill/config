@@ -18,8 +18,14 @@ if [ $? -eq 0 ]; then
   printDriveStats /dev/sdb2 HDD
 fi
 
+# Try to pull updates
+if env-status --pull; then
+  echo -e "${BLD_GRN}Environment${TXT_RST}: Updating..."
+  env-pull
+fi
+
 # Notify about unsaved changes
-if env-diff --quiet; then
+if env-status --push; then
   echo -e "\n${BLD_RED}WARNING${TXT_RST}: Uncommitted changes in ~/.env/git"
   echo -e "Update with \`env-push'"
 fi

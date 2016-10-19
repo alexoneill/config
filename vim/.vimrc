@@ -177,6 +177,30 @@ vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 
 "" Autocmds
+" Do various things for C files
+augroup ctemplates
+  autocmd BufNewFile *.c :read ~/.vim/templates/c.tpl
+  autocmd BufNewFile *.c :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
+  autocmd BufNewFile *.c :exe "%s/{{HEADER}}/" . expand("%:t:r") . ".h/g"
+  autocmd BufNewFile *.c :normal gg"_ddGG
+augroup END
+
+" Do various things for x86 Assembly files
+augroup ctemplates
+  autocmd BufNewFile *.S :read ~/.vim/templates/S.tpl
+  autocmd BufNewFile *.S :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
+  autocmd BufNewFile *.S :normal gg"_ddGG
+augroup END
+
+" Do various things for C header files
+augroup htemplates
+  autocmd BufNewFile *.h :read ~/.vim/templates/h.tpl
+  autocmd BufNewFile *.h :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
+  autocmd BufNewFile *.h :exe "%s/{{DEF}}/" . toupper(expand("%:t:r")) . "/g"
+  autocmd BufNewFile *.h :normal gg"_dd
+  autocmd BufNewFile *.h :14
+augroup END
+
 " Strip white space on write
 autocmd BufWritePre * :%s/\s\+$//e
 

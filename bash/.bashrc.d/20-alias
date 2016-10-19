@@ -21,6 +21,7 @@ alias wpa-scan="sudo wpa-scan"
 
 # Replacement
 alias python="ipython"
+alias make="makeup"
 
 # Mapping
 alias cls="clear"
