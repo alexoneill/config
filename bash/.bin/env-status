@@ -31,7 +31,7 @@ status=1
 
 (( PUSH )) && env-diff --quiet && status=0
 if (( ! PUSH )) && internet; then
-  git -C ~/.env/git fetch --dry-run &>/dev/null && status=0
+  [[ $(git -C ~/.env/git fetch --dry-run) ]] && status=0
 fi
 
 (( VISUAL )) && echo "$status"
