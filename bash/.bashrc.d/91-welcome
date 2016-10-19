@@ -21,7 +21,7 @@ fi
 # Try to pull updates
 if env-status --pull; then
   echo -e "${BLD_GRN}Environment${TXT_RST}: Updating..."
-  env-pull
+  env-update
 fi
 
 # Notify about unsaved changes
