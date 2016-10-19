@@ -27,11 +27,12 @@ while [[ ${1:0:1} == - ]]; do
   shift 1
 done
 
-status="1"
-cd ~/.env/git
+status=1
 
-(( PUSH )) && env-diff --quiet && status="0"
-(( ! PULL )) && internet && [[ -n "$(git fetch --dry-run)" ]] && status="0"
+(( PUSH )) && env-diff --quiet && status=0
+if (( ! PUSH )) && internet; then
+  git -C ~/.env/git fetch --dry-run &>/dev/null && status=0
+fi
 
 (( VISUAL )) && echo "$status"
 (( ! VISUAL )) && exit "$status"
