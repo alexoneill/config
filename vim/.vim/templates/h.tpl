@@ -4,13 +4,11 @@
  *
  * @author Alex O'Neill (aoneill)
  * @author Rohan Jadvani (rjadvani)
- *
- * @bugs No known bugs.
  */
 
-#ifndef __{{DEF}}__
-#define __{{DEF}}__
+#ifndef __{{DEF}}_H__
+#define __{{DEF}}_H__
 
 
 
-#endif /* __{{DEF}}__ */
+#endif /* __{{DEF}}_H__ */
