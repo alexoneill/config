@@ -2,12 +2,16 @@
 # internet
 # aoneill - 08/18/16
 
-VISUAL="0"
+VISUAL=0
 [[ "$#" == "1" ]] && [[ "$1" == "-v" || "$1" == "--visual" ]] && VISUAL="1"
 
-status="0"
-ping -W 2 -c 1 8.8.8.8 &>/dev/null
-[[ "$?" != "0" ]] && status="1"
+status=0
+if [[ $(hostname -i) == "127.0.0.2" ]]; then
+  status=1
+else
+  ping -W 2 -c 1 8.8.8.8 &>/dev/null
+  [[ "$?" != "0" ]] && status=1
+fi
 
 (( VISUAL )) && echo "$status"
 (( ! VISUAL )) && exit "$status"
