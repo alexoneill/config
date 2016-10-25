@@ -31,7 +31,11 @@ status=1
 
 (( PUSH )) && env-diff --quiet && status=0
 if (( ! PUSH )) && internet; then
-  [[ $(git -C ~/.env/git fetch --dry-run) ]] && status=0
+  url="https://api.github.com/repos/alexoneill/config/compare/HEAD..."
+  url="${url}$(git -C ~/.env/git rev-parse HEAD)"
+  curl "$url" 2>/dev/null | \
+    jq -r '.status' | \
+    grep -q "behind" && status=0
 fi
 
 (( VISUAL )) && echo "$status"
