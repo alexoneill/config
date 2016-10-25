@@ -196,9 +196,9 @@ augroup END
 augroup htemplates
   autocmd BufNewFile *.h :read ~/.vim/templates/h.tpl
   autocmd BufNewFile *.h :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
-  autocmd BufNewFile *.h :exe "%s/{{DEF}}/" . toupper(expand("%:t:r")) . "/g"
+  autocmd BufNewFile *.h :exe "%s/{{DEF}}/" . toupper(substitute(expand("%:h"), "/", "_", "") . "_" . expand("%:t:r")) . "/g"
   autocmd BufNewFile *.h :normal gg"_dd
-  autocmd BufNewFile *.h :14
+  autocmd BufNewFile *.h :12
 augroup END
 
 " Strip white space on write
