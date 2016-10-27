@@ -4,3 +4,6 @@
 
 # Fix line sizing issues
 shopt -s checkwinsize
+
+# Disable CAPS LOCK
+setxkbmap -option ctrl:nocaps
