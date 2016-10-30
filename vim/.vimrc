@@ -12,10 +12,15 @@ call vundle#begin()
 
 " Plugins
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
 
 "" Backspace
 set backspace=indent,eol,start
@@ -30,13 +35,14 @@ set textwidth=0
 
 "" Line numbering
 set nu
+set ruler
 
 "" Search options
 set incsearch
 set hlsearch
 
 "" Set scroll context
-set so=5
+set scrolloff=5
 
 "" Set mouse functionality
 "set mouse=a
@@ -196,7 +202,14 @@ augroup END
 augroup htemplates
   autocmd BufNewFile *.h :read ~/.vim/templates/h.tpl
   autocmd BufNewFile *.h :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
-  autocmd BufNewFile *.h :exe "%s/{{DEF}}/" . toupper(substitute(expand("%:h"), "/", "_", "") . "_" . expand("%:t:r")) . "/g"
+  autocmd BufNewFile *.h :exe "%s/{{DEF}}/" .
+        \ toupper(
+        \   substitute(
+        \     substitute(
+        \       expand("%:h") . "/", "^[./]*", "", ""
+        \     ), "/", "_", ""
+        \   ) . expand("%:t:r")
+        \ ) . "/g"
   autocmd BufNewFile *.h :normal gg"_dd
   autocmd BufNewFile *.h :12
 augroup END

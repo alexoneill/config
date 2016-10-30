@@ -38,6 +38,7 @@ alias la="ls -la"
 alias ll="ls -l"
 alias perms="stat -c '%a %n'"
 alias psgrep="ps aux | grep"
+alias csim="sim -no-gui -no-win"
 alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
 
