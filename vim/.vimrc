@@ -207,7 +207,7 @@ augroup htemplates
         \   substitute(
         \     substitute(
         \       expand("%:h") . "/", "^[./]*", "", ""
-        \     ), "/", "_", ""
+          \     ), "/", "_", "g"
         \   ) . expand("%:t:r")
         \ ) . "/g"
   autocmd BufNewFile *.h :normal gg"_dd
