@@ -6,7 +6,7 @@ VISUAL=0
 [[ "$#" == "1" ]] && [[ "$1" == "-v" || "$1" == "--visual" ]] && VISUAL="1"
 
 status=0
-if [[ $(hostname -i) == "127.0.0.2" ]]; then
+if [[ $(timeout 0.5 hostname -i) == "127.0.0.2" || "$?" != "0" ]]; then
   status=1
 else
   ping -W 2 -c 1 8.8.8.8 &>/dev/null
