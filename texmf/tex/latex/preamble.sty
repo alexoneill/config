@@ -173,8 +173,13 @@
 \DeclareMathOperator*{\argmax}{ARG\,MAX}
 \DeclareMathOperator*{\argmin}{ARG\,MIN}
 
+%% Extra array space (matrices)
+\renewcommand\arraystretch{1.5}
+
 %% Useful commands
 \newcommand{\given}[0]{\;|\;}
+\newcommand{\MAX}[2]{\text{max}\left\{#1, #2\right\}}
+\newcommand{\MIN}[2]{\text{min}\left\{#1, #2\right\}}
 \newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
 \newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
 \newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
