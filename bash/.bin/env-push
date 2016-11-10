@@ -7,9 +7,6 @@ cd ~/.env/git
 
 git add -A
 git commit --verbose -a
-
-if [[ "$?" == "0" ]]; then
-  git push
-fi
+[[ "$?" == "0" ]] && internet && git push
 
 cd "$CWD"
