@@ -185,3 +185,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 
 # Fix Middle-button paste
 exec --no-startup-id xmodmap ~/.Xmodmap
+
+# Add quick ranger command
+bindsym $mod+t exec --no-startup-id termite --exec=ranger
