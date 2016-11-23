@@ -13,6 +13,7 @@ call vundle#begin()
 " Plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'DoxygenToolkit.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -118,30 +119,12 @@ function InsertUpdateHeader()
   echo ""
 endfunction
 
-"" Command mappings
-command W w
-command Q q
-command Wq wq
-command WQ wq
-
 "" Shortcuts
 map <F2> :set nu!<CR>
 
 "" Function Calls
 map <F3> :call LongLineMatchToggle()<CR>
 nmap <F4> :call InsertUpdateHeader()<CR>
-
-"" Extra Normal Mode functionality
-nmap D dd
-nmap X @x
-" Ignore Ex mode
-noremap Q <NOP>
-
-" Reverse J
-nmap S i<Enter><Esc>k$
-
-" Split line at 80, move to next line
-nmap O 81<Bar>BhSj$
 
 " Tab and Shift-Tab for code
 nnoremap <S-Tab> <<
@@ -207,7 +190,7 @@ augroup htemplates
         \   substitute(
         \     substitute(
         \       expand("%:h") . "/", "^[./]*", "", ""
-          \     ), "/", "_", "g"
+        \     ), "/", "_", "g"
         \   ) . expand("%:t:r")
         \ ) . "/g"
   autocmd BufNewFile *.h :normal gg"_dd

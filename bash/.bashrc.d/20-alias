@@ -43,22 +43,22 @@ alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
 
 ## Shortcuts
-alias gst="git status"
+alias gst="git st"
 alias gstat="gst"
 alias st="gst"
 alias pending="gst"
 alias p="gst"
 
-alias gci="git commit"
+alias gci="git ci"
 alias gcommit="gci"
 alias ci="gci"
 
-alias gbr="git branch"
+alias gbr="git br"
 alias gbranch="gbr"
 alias br="gbr"
 
-alias gco="git checkout"
-alias gcheckout="git checkout"
+alias gco="git co"
+alias gcheckout="gco"
 alias co="gco"
 
 alias gdiff="git diff"
