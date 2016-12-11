@@ -14,7 +14,7 @@ iwlist wlp3s0 scan \
 ssidWidth="$(cat $file | awk '{ $1=$2=$3=$4=""; print substr($0, 5); }' | wc -L)"
 
 # Format output nicely
-cat $file | while IFS= read -r line; do         
+cat $file | while IFS= read -r line; do
   power=$(echo $line | awk '{ print $1; }')
   raw=$(echo $line | awk '{ print $2; }')
   type=$(echo $line | awk '{ print $3; }')

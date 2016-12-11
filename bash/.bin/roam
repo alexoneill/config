@@ -1,0 +1,14 @@
+#!/bin/bash
+# roam
+# aoneill - 12/09/16
+
+net="$(iwgetid -r)"
+mac="$(iwgetid --ap -r)"
+
+next="$(wpa-scan \
+         | grep "$net" \
+         | grep -v "$mac" \
+         | head -n 1 \
+         | sed -e "s/^.* (\([a-zA-Z0-9:]\+\)).*$/\1/")"
+
+[[ "$next" ]] && wpa_cli roam "$next"
