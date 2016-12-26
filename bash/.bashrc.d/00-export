@@ -3,7 +3,7 @@
 # aoneill - 11/26/15
 
 # Exports
-export PATH=$HOME/.bin-this:$HOME/.bin-git:$HOME/.bin-db:$PATH
+export PATH=$HOME/.bin-this:$HOME/.bin-git:$HOME/.bin-dr:$PATH
 export TEXMFHOME=/home/aoneill/.env/git/texmf
 
 # Vim all the way!

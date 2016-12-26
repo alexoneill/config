@@ -168,8 +168,8 @@ bar {
 exec --no-startup-id i3-wallpaper
 bindsym XF86Explorer exec --no-startup-id i3-wallpaper
 
-# Start the Dropbox daemon
-exec --no-startup-id dropbox
+# Start the Google Drive daemon
+exec --no-startup-id insync start
 
 # Start volume
 exec --no-startup-id pulseaudio
