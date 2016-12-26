@@ -130,6 +130,9 @@ nmap <F4> :call InsertUpdateHeader()<CR>
 nnoremap <S-Tab> <<
 nnoremap <Tab> >>
 
+" Disable Ex Mode
+nnoremap Q <NOP>
+
 "" Extra Insert Mode functionality
 " Tab and Shift-Tab for code
 inoremap <S-Tab> <C-d>
@@ -147,6 +150,8 @@ inoremap <Right> <NOP>
 
 " Ignore Function Key presses in insert mode
 inoremap <F1> <NOP>
+inoremap <F2> <NOP>
+inoremap <F3> <NOP>
 inoremap <F4> <NOP>
 inoremap <F5> <NOP>
 inoremap <F6> <NOP>
