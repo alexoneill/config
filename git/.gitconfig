@@ -22,3 +22,4 @@
 [core]
 	editor = vim --cmd 'let nojump=1'
 	whitespace = trailing-space,tab-in-indent
+	autocrlf = input
