@@ -36,4 +36,4 @@ color7  = #aaaaaa
 color15 = #ffffff
 
 [options]
-font = Operator Mono Light 9
+font = TermPro 9
