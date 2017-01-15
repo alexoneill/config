@@ -20,6 +20,9 @@ eval $(dircolors ~/.bashrc.d/data/dircolors)
 # Unicode support for less
 export LESSCHARSET=utf-8
 
+# Ignore duplicates in Bash history
+export HISTCONTROL=ignoreboth:erasedups
+
 # Colors
 # Regular
 export TXT_BLK='\e[0;30m' # Black - Regular
