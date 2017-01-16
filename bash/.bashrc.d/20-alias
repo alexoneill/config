@@ -42,6 +42,7 @@ alias psgrep="ps aux | grep"
 alias csim="sim -no-gui -no-win"
 alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
+alias i3-restart="i3-msg restart"
 
 ## Shortcuts
 alias gst="git st"
