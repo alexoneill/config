@@ -3,7 +3,6 @@
  * @brief
  *
  * @author Alex O'Neill (aoneill)
- * @author Rohan Jadvani (rjadvani)
  */
 
 #ifndef __{{DEF}}_H__
