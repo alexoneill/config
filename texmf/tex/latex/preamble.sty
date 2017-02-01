@@ -1,17 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{preamble}[2016/04/06 Preamble for Academic Documents]
+\ProvidesPackage{preamble}[2017/01/17 Preamble for Academic Documents]
 
+%% TODO:
 %% Incorporate http://tex.stackexchange.com/questions/41408/a-five-level-deep-list
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Includes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Some math symbols
-\RequirePackage{amsmath}
-\RequirePackage{amsfonts}
-\RequirePackage{amsthm}
-\RequirePackage{amssymb}
 
 %% \Mundus!
 \RequirePackage{marvosym}
@@ -37,10 +32,6 @@
 %% Importing pictures
 \RequirePackage{graphicx}
 
-%% Code
-\RequirePackage{lmodern}
-\RequirePackage{listings}
-
 %% Conditionals
 \RequirePackage{etoolbox}
 
@@ -53,9 +44,6 @@
 %% Drawing diagrams
 \RequirePackage{tikz}
 
-%% Trees
-\RequirePackage{tikz-qtree}
-
 %% End requires
 \ProcessOptions\relax
 
@@ -64,7 +52,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Use parts of the TiKz library
-\usetikzlibrary{snakes,arrows,shapes,trees}
+\usetikzlibrary{snakes,arrows,shapes}
 
 %% Modify how paragraphs behave in LaTeX
 \setlength{\parindent}{0pt}
@@ -72,47 +60,6 @@
 
 %% No page numbers
 \pagestyle{empty}
-
-%% Code setup
-\newdimen\zzsize
-\zzsize=11pt
-\newdimen\kwsize
-\kwsize=11pt
-
-\newcommand{\basicstyle}{\fontsize{\zzsize}{1.1\zzsize}\ttfamily}
-\newcommand{\keywordstyle}{\fontsize{\kwsize}{1.1\kwsize}\normalfont\bf}
-\newlength{\zzlstwidth}
-\settowidth{\zzlstwidth}{{\basicstyle~}}
-\newcommand{\lcm}{}
-
-\lstset{
-  xleftmargin=5.0ex,
-  basewidth=\zzlstwidth,
-  basicstyle=\basicstyle,
-  captionpos=b,
-  numbers=left, numberstyle=\small, numbersep=8pt,
-  keywordstyle=\keywordstyle,
-  keywords={signature,sig,structure,struct,function,fun,fn,case,of,type,datatype,let,val,fn,in,end,as,functor,alloc,if,then,else,while,with,and,start,do},
-  commentstyle=\rmfamily\slshape,
-  morecomment=[l]{\%},
-  lineskip={1.5pt},
-  columns=[l]fullflexible,
-  keepspaces=true,
-  mathescape=true,
-  escapeinside={@}{@},
-%% NOTE: need TWO sets of braces around each definition below!
-  literate={requires}{{$\lcm\text{\keywordstyle \% requires}$}}6
-           {returns}{{$\lcm\text{\keywordstyle \% returns}$}}6
-           {=}{{$\lcm=$}}2
-%           {(}{{$($}}2 {)}{{$)$}}2
-           {**}{{$\lcm\times$}}2
-           {||}{{$\lcm\Vert$}}2
-           {|}{{\texttt{|}}}2
-           {=>}{{$\lcm\boldsymbol\Rightarrow$}}2
-           {->}{{$\lcm\rightarrow$}}2
-           {'a}{{$\alpha$}}1
-           {'b}{{$\beta$}}1
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commands / Macros
@@ -171,76 +118,6 @@
 
 % Shortcut
 \newcommand{\blankpage}[0]{\afterpage{\emptypage}}
-
-%% Math operators
-\DeclareMathOperator*{\argmax}{ARG\,MAX}
-\DeclareMathOperator*{\argmin}{ARG\,MIN}
-
-%% Extra array space (matrices)
-\renewcommand\arraystretch{1.5}
-
-%% Useful commands
-\newcommand{\given}[0]{\;|\;}
-\newcommand{\goesto}[0]{\rightarrow}
-\newcommand{\such}[0]{\;:\;}
-\newcommand{\MAX}[2]{\text{max}\left\{#1, #2\right\}}
-\newcommand{\MIN}[2]{\text{min}\left\{#1, #2\right\}}
-\newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
-\newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
-\newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
-\newcommand{\IMG}[2]{\text{Im}_{#1}(#2)}
-\newcommand{\PIMG}[2]{\text{PreIm}_{#1}(#2)}
-\newcommand{\PR}[1]{\text{Pr(}#1\text{)}}
-\newcommand{\CPR}[2]{\text{Pr(}#1 \given #2\text{)}}
-\newcommand{\EV}[1]{\text{E[}#1\text{]}}
-\newcommand{\CEV}[2]{\text{E[}#1 \given #2\text{]} }
-\newcommand{\PMF}[2]{\text{f}_{#1}(#2)}
-\newcommand{\PDF}[2]{\text{F}_{#1}(#2)}
-\newcommand{\JPMF}[4]{\text{P}_{#1, #2}(#3, #4)}
-\newcommand{\CPMF}[3]{\text{P}_{#1 \given #2}(#3)}
-\newcommand{\VAR}[1]{\text{Var}(#1)}
-\newcommand{\COV}[2]{\text{Cov}(#1, #2)}
-\newcommand{\CORR}[2]{\text{Corr}(#1, #2)}
-\newcommand{\ZTRANS}[2]{\hat{#1}(#2)}
-\newcommand{\N}[0]{\mathbb{N}}
-\newcommand{\Z}[0]{\mathbb{Z}}
-\newcommand{\Q}[0]{\mathbb{Q}}
-\newcommand{\R}[0]{\mathbb{R}}
-\newcommand{\C}[0]{\mathbb{C}}
-\newcommand{\F}[0]{\mathbb{F}}
-\newcommand{\PSET}[1]{\mathcal{P}(#1)}
-\newcommand{\om}[0]{\omega}
-\newcommand{\OM}[0]{\Omega}
-\newcommand{\DER}[2]{\frac{d#1}{d#2}}
-\newcommand{\DET}[1]{\text{det}\left(#1\right)}
-\newcommand{\POLYRD}{\leq_p}
-\renewcommand{\P}[0]{\mathbb{P}}
-\renewcommand{\TH}[0]{^\text{th}}
-
-%% Finance, Stochastic Calculus
-\newcommand{\squiggle}[1]{\widetilde{#1}}
-
-\newcommand{\SPR}[1]{\squiggle{\mathbb{P}}\left(#1\right)}
-\newcommand{\NSPR}[1]{\mathbb{P}\left(#1\right)}
-
-\newcommand{\SEV}[1]{\squiggle{\mathbb{E}}\left[#1\right]}
-\newcommand{\NSEV}[1]{\mathbb{E}\left[#1\right]}
-
-\newcommand{\CSEV}[2]{\squiggle{\mathbb{E}}\left[#1 \given #2\right]}
-\newcommand{\NCSEV}[2]{\mathbb{E}\left[#1 \given #2\right]}
-
-\newcommand{\AOP}[1]{\mathcal{P}_0\left(#1\right)}
-\newcommand{\AOPO}[0]{\mathcal{P}_0^*}
-
-%% Code
-\newcommand{\code}[1]{\texttt{\frenchspacing{#1}}}
-\renewcommand{\O}[1]{
-  \ifstrequal{#1}{(}{
-    \text{O}#1
-  }{
-    \text{O}(#1)
-  }
-}
 
 %% Standard header
 \newcommand{\header}[0]{

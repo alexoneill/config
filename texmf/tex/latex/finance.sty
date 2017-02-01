@@ -1,0 +1,15 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{preamble}[2017/01/17 Finance utilities for LaTeX]
+
+%% Useful commands
+\newcommand{\squiggle}[1]{\widetilde{#1}}
+\newcommand{\SPR}[1]{\squiggle{\mathbb{P}}\left(#1\right)}
+\newcommand{\NSPR}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\SEV}[1]{\squiggle{\mathbb{E}}\left[#1\right]}
+\newcommand{\NSEV}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\CSEV}[2]{\squiggle{\mathbb{E}}\left[#1 \given #2\right]}
+\newcommand{\NCSEV}[2]{\mathbb{E}\left[#1 \given #2\right]}
+\newcommand{\AOP}[1]{\mathcal{P}_0\left(#1\right)}
+\newcommand{\AOPO}[0]{\mathcal{P}_0^*}
+
+\endinput

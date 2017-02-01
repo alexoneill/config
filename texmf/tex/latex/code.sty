@@ -1,0 +1,79 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{preamble}[2017/01/17 Code utilities for LaTeX documents]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Includes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Code
+\RequirePackage{lmodern}
+\RequirePackage{listings}
+
+%% Trees
+\RequirePackage{tikz-qtree}
+
+%% End requires
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Use parts of the TiKz library
+\usetikzlibrary{trees}
+
+%% Code setup
+\newdimen\zzsize
+\zzsize=11pt
+\newdimen\kwsize
+\kwsize=11pt
+
+\newcommand{\basicstyle}{\fontsize{\zzsize}{1.1\zzsize}\ttfamily}
+\newcommand{\keywordstyle}{\fontsize{\kwsize}{1.1\kwsize}\normalfont\bf}
+\newlength{\zzlstwidth}
+\settowidth{\zzlstwidth}{{\basicstyle~}}
+\newcommand{\lcm}{}
+
+\lstset{
+  xleftmargin=5.0ex,
+  basewidth=\zzlstwidth,
+  basicstyle=\basicstyle,
+  captionpos=b,
+  numbers=left, numberstyle=\small, numbersep=8pt,
+  keywordstyle=\keywordstyle,
+  keywords={signature,sig,structure,struct,function,fun,fn,case,of,type,datatype,let,val,fn,in,end,as,functor,alloc,if,then,else,while,with,and,start,do},
+  commentstyle=\rmfamily\slshape,
+  morecomment=[l]{\%},
+  lineskip={1.5pt},
+  columns=[l]fullflexible,
+  keepspaces=true,
+  mathescape=true,
+  escapeinside={@}{@},
+%% NOTE: need TWO sets of braces around each definition below!
+  literate={requires}{{$\lcm\text{\keywordstyle \% requires}$}}6
+           {returns}{{$\lcm\text{\keywordstyle \% returns}$}}6
+           {=}{{$\lcm=$}}2
+%           {(}{{$($}}2 {)}{{$)$}}2
+           {**}{{$\lcm\times$}}2
+           {||}{{$\lcm\Vert$}}2
+           {|}{{\texttt{|}}}2
+           {=>}{{$\lcm\boldsymbol\Rightarrow$}}2
+           {->}{{$\lcm\rightarrow$}}2
+           {'a}{{$\alpha$}}1
+           {'b}{{$\beta$}}1
+}
+
+%% Code
+\newcommand{\code}[1]{\texttt{\frenchspacing{#1}}}
+
+%% Theory
+\newcommand{\POLYRD}{\leq_p}
+\renewcommand{\O}[1]{
+  \ifstrequal{#1}{(}{
+    \text{O}#1
+  }{
+    \text{O}(#1)
+  }
+}
+
+\endinput
