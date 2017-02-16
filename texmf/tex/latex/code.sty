@@ -1,9 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{preamble}[2017/01/17 Code utilities for LaTeX documents]
+\ProvidesPackage{code}[2017/01/17 Code utilities for LaTeX documents]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Package Includes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The base requirements
+\RequirePackage{preamble}
 
 %% Code
 \RequirePackage{lmodern}
@@ -68,11 +71,33 @@
 
 %% Theory
 \newcommand{\POLYRD}{\leq_p}
+\newcommand{\store}{\leftarrow}
+\renewcommand{\o}[1]{
+  \ifstrequal{#1}{(}{
+    \text{o}#1
+  }{
+    \text{o}(#1)
+  }
+}
 \renewcommand{\O}[1]{
   \ifstrequal{#1}{(}{
     \text{O}#1
   }{
     \text{O}(#1)
+  }
+}
+\newcommand{\THETA}[1]{
+  \ifstrequal{#1}{(}{
+    \Theta #1
+  }{
+    \Theta(#1)
+  }
+}
+\newcommand{\OMEGA}[1]{
+  \ifstrequal{#1}{(}{
+    \Omega #1
+  }{
+    \Omega(#1)
   }
 }
 

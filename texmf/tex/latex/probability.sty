@@ -1,32 +1,48 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{preamble}[2017/01/17 Probability Theory utilities for LaTeX ]
+\ProvidesPackage{probability}[2017/01/17 Probability Theory utilities for LaTeX ]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Includes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The base requirements
+\RequirePackage{preamble}
+
+%% End requires
+\ProcessOptions\relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commands / Macros
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Probabilities
-\newcommand{\PR}[1]{\text{Pr(}#1\text{)}}
-\newcommand{\CPR}[2]{\text{Pr(}#1 \given #2\text{)}}
+\newcommand{\PR}[1]{\mathbb{P}\p{#1}}
+\newcommand{\CPR}[2]{\mathbb{P}\p{#1 \given #2}}
 
 % Expected Values
-\newcommand{\EV}[1]{\text{E[}#1\text{]}}
-\newcommand{\CEV}[2]{\text{E[}#1 \given #2\text{]} }
+\newcommand{\EV}[1]{\mathbb{E}\p[|]{#1}}
+\newcommand{\CEV}[2]{\mathbb{E}\p[|]{#1 \given #2}}
 
 % Distributions
-\newcommand{\PMF}[2]{\text{f}_{#1}(#2)}
-\newcommand{\PDF}[2]{\text{F}_{#1}(#2)}
-\newcommand{\JPMF}[4]{\text{P}_{#1, #2}(#3, #4)}
-\newcommand{\CPMF}[3]{\text{P}_{#1 \given #2}(#3)}
+\newcommand{\PMF}[2]{\text{f}_{#1}\p{#2}}
+\newcommand{\PDF}[2]{\text{F}_{#1}\p{#2}}
+\newcommand{\JPMF}[4]{\text{P}_{#1, #2}\p{#3, #4}}
+\newcommand{\CPMF}[3]{\text{P}_{#1 \given #2}\p{#3}}
 
 % Variance
-\newcommand{\VAR}[1]{\text{Var}(#1)}
-\newcommand{\COV}[2]{\text{Cov}(#1, #2)}
-\newcommand{\CORR}[2]{\text{Corr}(#1, #2)}
-\newcommand{\ZTRANS}[2]{\hat{#1}(#2)}
+\newcommand{\VAR}[1]{\text{Var}\p{#1}}
+\newcommand{\COV}[2]{\text{Cov}\p{#1, #2}}
+\newcommand{\CORR}[2]{\text{Corr}\p{#1, #2}}
+\newcommand{\ZTRANS}[2]{\hat{#1}\p{#2}}
 
 % Common variables
-\newcommand{\om}[0]{\omega}
-\newcommand{\OM}[0]{\Omega}
+\newcommand{\om}{\omega}
+\newcommand{\OM}{\Omega}
+
+%% Squiggle alternates
+\newcommand{\squiggle}[1]{\widetilde{#1}}
+\newcommand{\SPR}[1]{\squiggle{\mathbb{P}}\p{#1}}
+\newcommand{\SEV}[1]{\squiggle{\mathbb{E}}\p[[]{#1}}
+\newcommand{\CSEV}[2]{\squiggle{\mathbb{E}}\p[[]{#1 \given #2}}
 
 \endinput

@@ -13,6 +13,7 @@
 
 %% Easy lists
 \RequirePackage{enumerate}
+\RequirePackage{enumitem}
 
 %% Use the full page!
 \RequirePackage[left=0.5in,right=0.5in,top=0.5in,bottom=0.5in]{geometry}
@@ -32,8 +33,9 @@
 %% Importing pictures
 \RequirePackage{graphicx}
 
-%% Conditionals
+%% Conditionals, Commands
 \RequirePackage{etoolbox}
+\RequirePackage{xparse}
 
 %% Key Value pairs
 \RequirePackage{keyval}
@@ -60,6 +62,20 @@
 
 %% No page numbers
 \pagestyle{empty}
+
+%% Configure deeply nested enumeration
+\setlistdepth{9}
+
+\newlist{enum}{enumerate}{9}
+\setlist[enum,1]{label=\arabic*.}
+\setlist[enum,2]{label=(\alph*)}
+\setlist[enum,3]{label=\roman*.}
+\setlist[enum,4]{label=\arabic*.}
+\setlist[enum,5]{label=(\alph*)}
+\setlist[enum,6]{label=\roman*.}
+\setlist[enum,7]{label=\arabic*.}
+\setlist[enum,8]{label=(\alph*)}
+\setlist[enum,9]{label=\roman*.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Commands / Macros

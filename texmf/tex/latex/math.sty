@@ -1,11 +1,21 @@
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{preamble}[2017/01/17 Math utilities for LaTeX]
+\ProvidesPackage{math}[2017/01/17 Math utilities for LaTeX]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package Includes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The base requirements
+\RequirePackage{preamble}
 
 %% Some math symbols
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
 \RequirePackage{amsthm}
 \RequirePackage{amssymb}
+
+%% Various tools
+\RequirePackage{mathtools}
 
 %% End requires
 \ProcessOptions\relax
@@ -14,9 +24,25 @@
 %%% Commands / Macros
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Utilities
+\renewcommand{\TH}[0]{^\text{th}}
+\DeclareDocumentCommand{\p}{ O{(} m }{
+  \ifstrequal{#1}{\{}{
+    \left\{#2\right\}
+  }{
+    \ifstrequal{#1}{|}{
+      \left[#2\right]
+    }{
+      \left(#2\right)
+    }
+  }
+}
+
 %% Math operators
 \DeclareMathOperator*{\argmax}{ARG\,MAX}
 \DeclareMathOperator*{\argmin}{ARG\,MIN}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 %% Extra array space (matrices)
 \renewcommand\arraystretch{1.5}
@@ -28,18 +54,18 @@
 \newcommand{\such}[0]{\;:\;}
 
 % Min, Max
-\newcommand{\MAX}[2]{\text{max}\left\{#1, #2\right\}}
-\newcommand{\MIN}[2]{\text{min}\left\{#1, #2\right\}}
+\newcommand{\MAX}[2]{\text{max}\p[\{]{#1, #2}}
+\newcommand{\MIN}[2]{\text{min}\p[\{]{#1, #2}}
 
 % Modulus
 \newcommand{\MOD}[3]{#1 \equiv #2 \; \text{mod} \; #3}
 \newcommand{\NMOD}[3]{#1 \not\equiv #2 \; \text{mod}\; #3}
 
 % Other
-\newcommand{\RANGE}[1]{\text{range}(#1)}
-\newcommand{\GCD}[2]{\text{gcd}(#1, #2)}
-\newcommand{\IMG}[2]{\text{Im}_{#1}(#2)}
-\newcommand{\PIMG}[2]{\text{PreIm}_{#1}(#2)}
+\newcommand{\RANGE}[1]{\text{range}\p{#1}}
+\newcommand{\GCD}[2]{\text{gcd}\p{#1, #2}}
+\newcommand{\IMG}[2]{\text{Im}_{#1}\p{#2}}
+\newcommand{\PIMG}[2]{\text{PreIm}_{#1}\p{#2}}
 
 % Number theory
 \newcommand{\N}[0]{\mathbb{N}}
@@ -48,16 +74,13 @@
 \newcommand{\R}[0]{\mathbb{R}}
 \newcommand{\C}[0]{\mathbb{C}}
 \newcommand{\F}[0]{\mathbb{F}}
-\newcommand{\PSET}[1]{\mathcal{P}(#1)}
+\newcommand{\PSET}[1]{\mathcal{P}\p{1}}
 \renewcommand{\P}[0]{\mathbb{P}}
 
 % Calculus
 \newcommand{\DER}[2]{\frac{d#1}{d#2}}
 
 % Matricies
-\newcommand{\DET}[1]{\text{det}\left(#1\right)}
-
-% Utilities
-\renewcommand{\TH}[0]{^\text{th}}
+\newcommand{\DET}[1]{\text{det}\p{#1}}
 
 \endinput
