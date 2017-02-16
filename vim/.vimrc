@@ -48,9 +48,15 @@ set scrolloff=5
 "" Set mouse functionality
 "set mouse=a
 
+"" Increase copy buffer
+set viminfo='20,<1000,s1000
+
 "" Return to the last position in the file
 if !exists('nojump') && has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
+  au BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$")
+          \ | exe "normal! g'\"zz"
+        \ | endif
 endif
 
 " Spelling
@@ -87,10 +93,10 @@ function InsertUpdateHeader()
   endif
 
   " Get needed parts
-  let l:filename = l:comment_parts[0] . ' ' . expand('%:t') . l:comment_parts[1]
+  let l:filename = l:comment_parts[0] . expand('%:t') . l:comment_parts[1]
   let l:author = 'aoneill'
   let l:date = strftime('%m/%d/%y')
-  let l:author_date = l:comment_parts[0] . ' ' . l:author . ' - ' . l:date
+  let l:author_date = l:comment_parts[0] . l:author . ' - ' . l:date
   let l:author_date .= l:comment_parts[1]
   let l:author_date_regex = l:author . ' - \d\+/\d\+/\d\+'
   let l:exec_line_regex = '^#!.*'

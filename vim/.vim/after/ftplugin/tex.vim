@@ -10,5 +10,8 @@ setlocal expandtab
 " Quick way to insert task blocks
 nmap T o\begin{task}{}<Enter>\end{task}<Enter><Esc>2k$i
 
-" Quick way to insert enumerate blocks
-nmap E o\begin{enumerate}<Enter>\item<Enter>\end{enumerate}<Esc>k$a 
+" Quick way to insert enum blocks
+nmap E o\begin{enum}<Enter>\item<Enter>\end{enum}<Esc>k$a
+
+" Quick way to insert align* blocks
+nmap A o\begin{align*}<Enter><Enter>\end{align*}<Esc>k$a
