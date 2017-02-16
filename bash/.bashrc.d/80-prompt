@@ -3,12 +3,13 @@
 # aoneill - 11/26/15
 
 function prompt_command {
+  OLD_PWD_BACKUP="$OLD_PWD"
   HOST="\[${BLD_GRN}\]\u@\h\[${TXT_RST}\]"
 
   git branch &>/dev/null;
   if [ "$?" -eq 0 ]
   then
-    git status | grep "nothing to commit" &>/dev/null;
+    git status 2>/dev/null | grep "nothing to commit" &>/dev/null;
 
     # Changed files
     if [ "$?" -eq "0" ]; then
@@ -24,39 +25,18 @@ function prompt_command {
       GIT=$BLD_RED
     fi
 
-    # Finding highest directory that has no git
-    curPath="$(pwd)"
-    find . -maxdepth 1 -type d | grep ".git$" &>/dev/null;
-    if [ $? -ne 0 ]; then
-      while [ "$(pwd)" != "/" ]; do
-        cd ..
-
-        find . -maxdepth 1 -type d | grep ".git$" &>/dev/null;
-        if [ $? -eq 0 ]; then
-          cd ..
-          break
-        fi
-      done
-    else
-      cd ..
-    fi
-
-    # Go back to the current directory
-    nonGit="$(pwd)"
-    cd "$curPath"
-
-    if [[ "$nonGit" == "/" ]]
-    then
-      nonGit=
-      gitPath="$(echo "$curPath" | sed "s|^$HOME|~|")"
+    # Git base dir
+    git="$(git rev-parse --show-toplevel 2>/dev/null)"
+    if [[ "$git" == "/" ]]; then
+      DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
     else
       # Path to Git folder
-      gitPath="$(echo "$curPath" | sed "s|$nonGit||")"
-      nonGit="$(echo "$nonGit" | sed "s|^$HOME|~|")"
-    fi
+      gitPath="$(pwd | sed "s|$(dirname "$git")||")"
+      git="$(dirname "$git" | sed "s|^$HOME|~|")"
 
-    # Color accordingly
-    DIR="\[${BLD_BLU}\]$nonGit\[${GIT}\]$gitPath\[${TXT_RST}\]"
+      # Color accordingly
+      DIR="\[${BLD_BLU}\]$git\[${GIT}\]$gitPath\[${TXT_RST}\]"
+    fi
   else
     DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
   fi
@@ -66,6 +46,9 @@ function prompt_command {
 
   # Save history
   history -a
+
+  # Restore old pwd
+  OLD_PWD="$OLD_PWD_BACKUP"
 }
 
 PROMPT_COMMAND=prompt_command
