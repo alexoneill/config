@@ -11,7 +11,7 @@ setlocal expandtab
 nmap T o\begin{task}{}<Enter>\end{task}<Enter><Esc>2k$i
 
 " Quick way to insert enum blocks
-nmap E o\begin{enum}<Enter>\item<Enter>\end{enum}<Esc>k$a
+nmap E o\begin{enum}<Enter>\item <Tab><Enter>\end{enum}<Esc>k$a
 
 " Quick way to insert align* blocks
-nmap A o\begin{align*}<Enter><Enter>\end{align*}<Esc>k$a
+nmap A o\begin{align*}<Enter>&<Enter>\end{align*}<Esc>k$a
