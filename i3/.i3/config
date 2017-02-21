@@ -189,3 +189,4 @@ exec --no-startup-id xmodmap ~/.Xmodmap
 
 # Add quick ranger command
 bindsym $mod+t exec --no-startup-id termite --exec=ranger
+
