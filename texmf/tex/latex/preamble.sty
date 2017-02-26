@@ -82,10 +82,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % For tasks
+\newcounter{tasks}
 \newcounter{subtasks}
 \newenvironment{task}[1]{
-  %% Reset sub-counts
+  %% Get a fresh page on everything but the first task
+  \ifnum\thetasks>0\newpage\fi
+
+  %% Counts
+  \addtocounter{tasks}{1}
   \setcounter{subtasks}{0}
+
   \textbf{#1}
   \vspace{3pt}
   \hrule height 1pt
