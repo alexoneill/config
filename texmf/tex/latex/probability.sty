@@ -20,7 +20,12 @@
 \newcommand{\CPR}[2]{\mathbb{P}\p{#1 \given #2}}
 
 % Expected Values
-\newcommand{\EV}[1]{\mathbb{E}\p[|]{#1}}
+\NewDocumentCommand{\EV}{ m g }{%
+  \IfNoValueTF{#2}{%
+    \mathbb{E}\p[|]{#1}%
+   }{%
+    \mathbb{E}_{#1}\p[|]{#2}%
+   }}
 \newcommand{\CEV}[2]{\mathbb{E}\p[|]{#1 \given #2}}
 
 % Distributions
@@ -30,7 +35,12 @@
 \newcommand{\CPMF}[3]{\text{P}_{#1 \given #2}\p{#3}}
 
 % Variance
-\newcommand{\VAR}[1]{\text{Var}\p{#1}}
+\NewDocumentCommand{\VAR}{ m g }{%
+  \IfNoValueTF{#2}{%
+    \text{Var}\p{#1}%
+  }{%
+    \text{Var}_{#1}\p{#2}%
+  }}
 \newcommand{\COV}[2]{\text{Cov}\p{#1, #2}}
 \newcommand{\CORR}[2]{\text{Corr}\p{#1, #2}}
 \newcommand{\ZTRANS}[2]{\hat{#1}\p{#2}}

@@ -74,11 +74,18 @@
 \newcommand{\R}[0]{\mathbb{R}}
 \newcommand{\C}[0]{\mathbb{C}}
 \newcommand{\F}[0]{\mathbb{F}}
+\newcommand{\A}[0]{\mathcal{F}}
 \newcommand{\PSET}[1]{\mathcal{P}\p{1}}
 \renewcommand{\P}[0]{\mathbb{P}}
 
 % Calculus
-\newcommand{\DER}[2]{\frac{d#1}{d#2}}
+\newcommand{\DER}[2]{}
+\RenewDocumentCommand{\d}{ m g }{%
+  \IfNoValueTF{#2}{%
+    \;d#1%
+  }{%
+    \;\frac{d#1}{d#2}%
+  }}
 
 % Matricies
 \newcommand{\DET}[1]{\text{det}\p{#1}}
