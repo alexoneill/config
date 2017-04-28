@@ -98,8 +98,8 @@ bindsym $mod+a focus parent
 
 # Enable / disable external monitor
 # XF86Display
-bindsym $mod+m exec --no-startup-id xrandr --output HDMI-2 --auto --above eDP-1
-bindsym $mod+Shift+m exec --no-startup-id xrandr --output HDMI-2 --off
+bindsym $mod+m exec --no-startup-id xrandr --output HDMI2 --auto --above eDP1 && ~/.fehbg
+bindsym $mod+Shift+m exec --no-startup-id xrandr --output HDMI2 --off && ~/.fehbg
 
 # switch to workspace
 bindsym $mod+1 workspace 1
