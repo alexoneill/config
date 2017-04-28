@@ -2,6 +2,9 @@
 # cleantex
 # aoneill - 11/26/15
 
+echo "BAD PROGRAM. FIX ME!"
+exit 1
+
 usage() {
   # Usage information
   echo "Usage: $0 [-v] file"
