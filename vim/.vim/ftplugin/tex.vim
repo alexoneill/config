@@ -3,3 +3,6 @@
 
 " Set spelling
 set spell
+
+" Add our custom enumerate evironment
+let g:tex_itemize_env = "itemize\|description\|enum\|enumerate\|thebibliography"

@@ -41,6 +41,7 @@ set ruler
 "" Search options
 set incsearch
 set hlsearch
+set showmatch
 
 "" Set scroll context
 set scrolloff=5
@@ -205,7 +206,7 @@ augroup htemplates
         \   ) . expand("%:t:r")
         \ ) . "/g"
   autocmd BufNewFile *.h :normal gg"_dd
-  autocmd BufNewFile *.h :12
+  autocmd BufNewFile *.h :11
 augroup END
 
 " Strip white space on write

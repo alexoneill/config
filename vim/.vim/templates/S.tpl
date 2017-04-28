@@ -2,7 +2,7 @@
  * @file {{FILE}}
  * @brief
  *
- * @author Alex O'Neill (aoneill)
+ * @author Alex O'Neill <me@aoneill.me>
  * @bugs No known bugs.
  */
 
