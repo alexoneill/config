@@ -30,12 +30,14 @@ function prompt_command {
     if [[ "$git" == "/" ]]; then
       DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
     else
-      # Path to Git folder
-      gitPath="$(pwd | sed "s|$(dirname "$git")||")"
-      git="$(dirname "$git" | sed "s|^$HOME|~|")"
+      # Path within git folder
+      gitPath="$(readlink -f "$(pwd)" | sed "s|$(dirname "$git")||")"
+
+      # Path outside of git folder
+      outPath="$(pwd | sed -e "s|$gitPath$||" | sed -e "s|^$HOME|~|")"
 
       # Color accordingly
-      DIR="\[${BLD_BLU}\]$git\[${GIT}\]$gitPath\[${TXT_RST}\]"
+      DIR="\[${BLD_BLU}\]$outPath\[${GIT}\]$gitPath\[${TXT_RST}\]"
     fi
   else
     DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
