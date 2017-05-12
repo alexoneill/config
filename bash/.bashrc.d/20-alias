@@ -36,7 +36,7 @@ alias vi="vim"
 
 # Mapping with flags
 alias dhcp="sudo dhcpcd -k; sudo dhcpcd -n"
-alias ls="ls --color"
+alias ls="ls -v --color"
 alias l="ls -a"
 alias la="ls -la"
 alias ll="ls -l"
