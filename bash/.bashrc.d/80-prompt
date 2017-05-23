@@ -27,18 +27,15 @@ function prompt_command {
 
     # Git base dir
     git="$(git rev-parse --show-toplevel 2>/dev/null)"
-    if [[ "$git" == "/" ]]; then
-      DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
-    else
-      # Path within git folder
-      gitPath="$(readlink -f "$(pwd)" | sed "s|$(dirname "$git")||")"
 
-      # Path outside of git folder
-      outPath="$(pwd | sed -e "s|$gitPath$||" | sed -e "s|^$HOME|~|")"
+    # Path within git folder
+    gitPath="$(readlink -f "$(pwd)" | sed "s|$(dirname "$git")||")"
 
-      # Color accordingly
-      DIR="\[${BLD_BLU}\]$outPath\[${GIT}\]$gitPath\[${TXT_RST}\]"
-    fi
+    # Path outside of git folder
+    outPath="$(pwd | sed -e "s|$gitPath$||" | sed -e "s|^$HOME|~|")"
+
+    # Color accordingly
+    DIR="\[${BLD_BLU}\]$outPath\[${GIT}\]$gitPath\[${TXT_RST}\]"
   else
     DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
   fi
