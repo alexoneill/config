@@ -25,14 +25,31 @@ function prompt_command {
       GIT=$BLD_RED
     fi
 
+    # Paths
+    cwd="$(pwd)"
+    here="$(readlink -f "$cwd")"
+
     # Git base dir
     git="$(git rev-parse --show-toplevel 2>/dev/null)"
 
-    # Path within git folder
-    gitPath="$(readlink -f "$(pwd)" | sed "s|$(dirname "$git")||")"
+    # Symbolic link territory
+    if [[ "$here" != "$cwd" ]]; then
+      # Reverse
+      r_cwd="$(echo "$cwd" | rev)"
+      r_here="$(echo "$here" | rev)"
+
+      # Get largest similarity between the paths
+      # Assume this is the git path
+      gitPath=$(printf "%s\n%s\n" "$r_here" "$r_cwd" \
+                  | sed -e 'N;s/\(.*\).*\n\1.*$/\1/' \
+                  | rev)
+    else
+      # Path within git folder
+      gitPath="$(echo "$here" | sed "s|$(dirname "$git")||")"
+    fi
 
     # Path outside of git folder
-    outPath="$(pwd | sed -e "s|$gitPath$||" | sed -e "s|^$HOME|~|")"
+    outPath="$(echo "$cwd" | sed -e "s|$gitPath$||" | sed -e "s|^$HOME|~|")"
 
     # Color accordingly
     DIR="\[${BLD_BLU}\]$outPath\[${GIT}\]$gitPath\[${TXT_RST}\]"
