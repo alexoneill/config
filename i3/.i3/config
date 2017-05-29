@@ -165,6 +165,15 @@ bar {
   status_command py3status -c ~/.i3/py3status.conf
 }
 
+# test bar
+exec --no-startup-id ~/tmp/py3status/build/kill-test.sh
+bar {
+  font pango:TermPro 9
+  status_command /usr/bin/python3 ~/tmp/py3status/py3status/__init__.py -c ~/tmp/py3status/build/bar-test.conf
+
+  id bar-test
+}
+
 # Restore the desktop background using nitrogen
 exec --no-startup-id i3-wallpaper
 bindsym XF86Explorer exec --no-startup-id i3-wallpaper
