@@ -5,6 +5,7 @@
 function prompt_command {
   OLD_PWD_BACKUP="$OLD_PWD"
   HOST="\[${BLD_GRN}\]\u@\h\[${TXT_RST}\]"
+  PROMPT="$"
 
   git branch &>/dev/null;
   if [ "$?" -eq 0 ]
@@ -52,13 +53,14 @@ function prompt_command {
     outPath="$(echo "$cwd" | sed -e "s|$gitPath$||" | sed -e "s|^$HOME|~|")"
 
     # Color accordingly
-    DIR="\[${BLD_BLU}\]$outPath\[${GIT}\]$gitPath\[${TXT_RST}\]"
+    DIR="\[${BLD_BLU}\]$outPath\[${GIT}\]$gitPath"
+    PROMPT="$\[${TXT_RST}\]"
   else
     DIR="\[${BLD_BLU}\]\w\[${TXT_RST}\]"
   fi
 
   # Export proper coloring
-  PS1="${HOST}:${DIR}$ "
+  PS1="${HOST}:${DIR}${PROMPT} "
 
   # Save history
   history -a
