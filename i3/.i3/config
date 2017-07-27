@@ -84,8 +84,8 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-for_window [title="^OpenGL"] floating enable
-for_window [title="^Simics Control$"] floating enable
+for_window [class="Qemu-system-i386"] floating enable
+for_window [title="^qemu-system-i386*"] floating enable
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -163,15 +163,6 @@ bindsym $mod+r mode "resize"
 bar {
   font pango:TermPro 9
   status_command py3status -c ~/.i3/py3status.conf
-}
-
-# test bar
-exec --no-startup-id ~/tmp/py3status/build/kill-test.sh
-bar {
-  font pango:TermPro 9
-  status_command /usr/bin/python3 ~/tmp/py3status/py3status/__init__.py -c ~/tmp/py3status/build/bar-test.conf
-
-  id bar-test
 }
 
 # Restore the desktop background using nitrogen
