@@ -11,8 +11,6 @@ alias amount="sudo amount"
 alias aumount="sudo aumount"
 alias journalctl="sudo journalctl"
 alias lid="sudo lid"
-alias netctl-auto="sudo netctl-auto"
-alias netctl-restart="sudo netctl-restart"
 alias pacman="sudo pacman"
 alias pacro="sudo pacro"
 alias roam="sudo roam"
@@ -21,16 +19,17 @@ alias wifi-menu="sudo wifi-menu"
 alias wpa-scan="sudo wpa-scan"
 
 # Replacement
-alias python="ipython"
 alias make="makeup"
 
 # Mapping
 alias cls="clear"
 alias g="git"
+alias ipy="ipython"
 alias lock="sxlock"
-alias net="netctl-auto"
+alias net="nmcli"
 alias open="xdg-open"
 alias py="python"
+alias py2="python2"
 alias sml="rlwrap sml"
 alias vi="vim"
 
@@ -47,28 +46,3 @@ alias csim="sim -no-gui -no-win"
 alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
 alias i3-restart="i3-msg restart"
-
-## Shortcuts
-alias gst="git st"
-alias gstat="gst"
-alias st="gst"
-alias pending="gst"
-alias p="gst"
-
-alias gci="git ci"
-alias gcommit="gci"
-alias ci="gci"
-
-alias gbr="git br"
-alias gbranch="gbr"
-alias br="gbr"
-
-alias gco="git co"
-alias gcheckout="gco"
-alias co="gco"
-
-alias gdiff="git diff"
-
-alias gph="git push"
-alias gpush="gph"
-alias push="gph"

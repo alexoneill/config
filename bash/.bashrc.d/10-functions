@@ -66,3 +66,28 @@ function makeup() {
 
   [[ -f "$dir/Makefile" ]] && make -C "$dir" $@
 }
+
+# Determine the number of days left on a certificate
+function certdays() {
+  site="$1"
+
+  echo \
+    | openssl s_client \
+        -connect "$site:443" \
+        -servername "$site" \
+        2>/dev/null \
+    | openssl x509 -noout -dates
+}
+
+# Convert a DOS file to Unix (convert line endings)
+function dos2unix() {
+  tr -d '\r' < $1 > $2
+}
+
+function i3bar-relaod() {
+  i3-msg -t command reload
+  killall i3bar
+
+  bar_id=$(i3-msg -t get_bar_config | sed -e 's/.*"bar-\([0-9]\+\)".*/bar-\1/')
+  i3bar --bar_id=${bar_id} --socket=$(i3 --get-socketpath) &
+}
