@@ -46,3 +46,4 @@ color15 = #c5c8c6
 
 [options]
 font = Inconsolata 10
+scrollback_lines = -1

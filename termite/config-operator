@@ -37,3 +37,4 @@ color15 = #ffffff
 
 [options]
 font = TermPro 9
+scrollback_lines = -1
