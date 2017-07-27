@@ -22,6 +22,7 @@ filetype plugin indent on
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
+set ff=unix
 
 "" Backspace
 set backspace=indent,eol,start
