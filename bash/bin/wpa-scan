@@ -2,13 +2,18 @@
 
 # Distill down information about discovered networks
 file=$(mktemp)
+raw_file=$(mktemp)
 iwlist wlp3s0 scan \
+  | tee $raw_file \
   | grep "Address\|Quality\|Encryption\|ESSID" \
   | sed -e "s/^ \+//g" \
   | awk '{ if(NR % 4) printf("%s ", $0); else printf("%s\n", $0); }' \
   | sed -e 's/.*Address: \([0-9A-Z:]\+\) .*=\([0-9]\+\/[0-9]\+\) '\
 '.*=\(-[0-9]\+\) .*:\(on\|off\) .*:"\(.*\)".*/\2 \3 \4 \1 \5/g' \
   | sort -rn > $file
+
+echo "raw: $raw_file"
+echo "clean: $file"
 
 # Find the maximum width of found SSIDs
 ssidWidth="$(cat $file | awk '{ $1=$2=$3=$4=""; print substr($0, 5); }' | wc -L)"
@@ -28,5 +33,3 @@ cat $file | while IFS= read -r line; do
 
   echo "$power% ($raw) $type $ssid ($mac)"
 done
-
-rm $file
