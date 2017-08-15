@@ -1,7 +1,0 @@
-# .gitignore
-# aoneill - 02/26/17
-
-# Ignore all except for some configuration files
-*
-!.gitignore
-![0-9][0-9]-*.conf
