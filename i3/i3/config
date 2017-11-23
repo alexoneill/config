@@ -175,6 +175,9 @@ exec --no-startup-id insync start
 # Start volume
 exec --no-startup-id pulseaudio
 
+# Start the wifi applet
+exec --no-startup-id nm-applet
+
 # Enable volume controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 2%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer sset Master 2%-
