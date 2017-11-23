@@ -178,6 +178,10 @@ inoremap <F15> <NOP>
 vnoremap <S-Tab> <gv
 vnoremap <Tab> >gv
 
+"" Command mapping
+" Save files with sudo
+cmap W w !sudo tee > /dev/null %
+
 "" Autocmds
 " Do various things for C files
 augroup ctemplates
