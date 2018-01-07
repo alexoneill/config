@@ -180,7 +180,7 @@ vnoremap <Tab> >gv
 
 "" Command mapping
 " Save files with sudo
-cmap W w !sudo tee > /dev/null %
+command W w !sudo tee > /dev/null %
 
 "" Autocmds
 " Do various things for C files
