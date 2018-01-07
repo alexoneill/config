@@ -91,3 +91,10 @@ function i3bar-relaod() {
   bar_id=$(i3-msg -t get_bar_config | sed -e 's/.*"bar-\([0-9]\+\)".*/bar-\1/')
   i3bar --bar_id=${bar_id} --socket=$(i3 --get-socketpath) &
 }
+
+function github() {
+  origin=$(git config --get remote.origin.url)
+  [[ -n $origin ]] && \
+    xdg-open $(echo $origin | sed -e "s|^git@github.com:|https://github.com|")
+}
+
