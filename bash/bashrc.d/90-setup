@@ -6,4 +6,4 @@
 shopt -s checkwinsize
 
 # Disable CAPS LOCK
-setxkbmap -option ctrl:nocaps
+[ -x /usr/bin/setxkbmap ] && setxkbmap -option ctrl:nocaps
