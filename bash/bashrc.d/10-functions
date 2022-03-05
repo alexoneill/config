@@ -95,6 +95,7 @@ function i3bar-relaod() {
 function github() {
   origin=$(git config --get remote.origin.url)
   [[ -n $origin ]] && \
+    echo $(echo $origin | sed -e "s|^git@github.com:|https://github.com|") && \
     xdg-open $(echo $origin | sed -e "s|^git@github.com:|https://github.com|")
 }
 

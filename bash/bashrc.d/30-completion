@@ -2,8 +2,14 @@
 # 30-completion
 # aoneill - 11/26/15
 
+# Enable completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# Get git completion
+source /usr/local/git/contrib/completion/git-completion.bash
+
 # Source all the known completion files
-for file in $HOME/.bashrc.d/completion/* 
+for file in $HOME/.bashrc.d/completion/*
 do
   [ -x $file ] && source $file
 done

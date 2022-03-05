@@ -1,0 +1,24 @@
+LOCAL_PERSIST="cwspear/docker-local-persist-volume-plugin"
+
+function _docker_start_local_persist() {
+  # Start the local-persist plugin
+  docker run -d \
+    -v /run/docker/plugins/:/run/docker/plugins/ \
+    -v /tmp/docker-local-persist/plugin-data/:/var/lib/docker/plugin-data/ \
+    "${LOCAL_PERSIST}"
+}
+
+# Start Docker if not already started
+function _docker_start() {
+  # Check to see if the local persist container is running.
+  docker ps \
+    | awk '{ print $2; }' \
+    | tail -n+2 \
+    | grep -q "${LOCAL_PERSIST}" \
+    && return 0
+
+  # Start local-persist
+  _docker_start_local_persist
+}
+
+_docker_start

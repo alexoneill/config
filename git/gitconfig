@@ -10,6 +10,7 @@
   co = checkout
 
   # Aliases
+  append = commit --amend --no-edit
   pending = status
   p = status
 

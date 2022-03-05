@@ -4,6 +4,7 @@
 
 function prompt_command {
   OLD_PWD_BACKUP="$OLD_PWD"
+  TIME="\[${BLD_WHT}\][$(date +'%H:%M')]\[${TXT_RST}\] "
   HOST="\[${BLD_GRN}\]\u@\h\[${TXT_RST}\]"
   PROMPT="$"
 
@@ -60,7 +61,7 @@ function prompt_command {
   fi
 
   # Export proper coloring
-  PS1="${HOST}:${DIR}${PROMPT} "
+  PS1="${TIME}${HOST}:${DIR}${PROMPT} "
 
   # Save history
   history -a

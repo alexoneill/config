@@ -35,7 +35,7 @@ function args() {
       # Falls-through to verbose
       -d|--dry-run)
         export DRY_RUN=1
-        ;&
+        ;;
 
       # Whether to output actions as they are taken
       -v|--verbose)
@@ -113,17 +113,17 @@ function init() {
   # Create folders
   # Create only if the directory does not yet exist
   sed -e "s|{{HOME}}|$HOME|g" "$FOLDERS" \
-    | dir_filter | xargs -r bash -c 'tell mkdir -p $@' _
+    | dir_filter | xargs -L 1 bash -c 'tell mkdir -p $@' _
 
   # Create links
   # First create the parent directory for the link destination, then the link
   # only if the operations are valid
   sed -e "s|{{HOME}}|$HOME|g" -e "s|{{GIT_ENV}}|$DIR|g" $LINKS \
-    | awk -e '{ print $2; }' \
+    | awk '{ print $2; }' \
     | xargs -L 1 dirname \
-    | dir_filter | xargs -r bash -c 'tell mkdir -p $@' _
+    | dir_filter | xargs -L 1 bash -c 'tell mkdir -p $@' _
   sed -e "s|{{HOME}}|$HOME|g" -e "s|{{GIT_ENV}}|$DIR|g" $LINKS \
-    | ln_filter | xargs -rxn 2 bash -c 'tell ln -fs $@' _
+    | ln_filter | xargs -n 2 bash -c 'tell ln -fs $@' _
 }
 
 # Run init only when exec'd

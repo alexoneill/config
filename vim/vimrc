@@ -7,13 +7,17 @@ set nocompatible
 filetype off
 
 " Init Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'DoxygenToolkit.vim'
+
+" Syntax
+Plugin 'cespare/vim-toml'
+Plugin 'isRuslan/vim-es6'
 
 call vundle#end()
 filetype plugin indent on
@@ -28,12 +32,20 @@ set ff=unix
 set backspace=indent,eol,start
 
 "" Indentation
-set autoindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set textwidth=0
+set expandtab   " Make sure that every file uses artisan, hand-crafted spaces
+set shiftround  " Round indent to multiple of 'shiftwidth'
+set smartindent " Do smart indenting when starting a new line
+set autoindent  " Copy indent from current line, over to the new line
+set textwidth=0 " Ignore text wrapping
+
+" Set the tab width
+let s:tabwidth=2
+exec 'set tabstop='    .s:tabwidth
+exec 'set shiftwidth=' .s:tabwidth
+exec 'set softtabstop='.s:tabwidth
+
+" Ignore Python bs
+let g:python_recommended_style=0
 
 "" Line numbering
 set nu
@@ -67,6 +79,11 @@ hi clear SpellBad
 hi SpellBad cterm=underline
 hi clear SpellCap
 hi SpellCap cterm=underline
+
+"" Undo behavior
+set undofile " Maintain undo history between sessions
+set undodir=~/.cache/vim/undodir
+
 
 "" Functions
 " Highlighting, and toggle functionality
@@ -180,39 +197,39 @@ vnoremap <Tab> >gv
 
 "" Command mapping
 " Save files with sudo
-command W w !sudo tee > /dev/null %
+" command W w !sudo tee > /dev/null %
 
-"" Autocmds
-" Do various things for C files
-augroup ctemplates
-  autocmd BufNewFile *.c :read ~/.vim/templates/c.tpl
-  autocmd BufNewFile *.c :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
-  autocmd BufNewFile *.c :exe "%s/{{HEADER}}/" . expand("%:t:r") . ".h/g"
-  autocmd BufNewFile *.c :normal gg"_ddGG
-augroup END
-
-" Do various things for x86 Assembly files
-augroup ctemplates
-  autocmd BufNewFile *.S :read ~/.vim/templates/S.tpl
-  autocmd BufNewFile *.S :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
-  autocmd BufNewFile *.S :normal gg"_ddGG
-augroup END
-
-" Do various things for C header files
-augroup htemplates
-  autocmd BufNewFile *.h :read ~/.vim/templates/h.tpl
-  autocmd BufNewFile *.h :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
-  autocmd BufNewFile *.h :exe "%s/{{DEF}}/" .
-        \ toupper(
-        \   substitute(
-        \     substitute(
-        \       expand("%:h") . "/", "^[./]*", "", ""
-        \     ), "/", "_", "g"
-        \   ) . expand("%:t:r")
-        \ ) . "/g"
-  autocmd BufNewFile *.h :normal gg"_dd
-  autocmd BufNewFile *.h :11
-augroup END
+" "" Autocmds
+" " Do various things for C files
+" augroup ctemplates
+"   autocmd BufNewFile *.c :read ~/.vim/templates/c.tpl
+"   autocmd BufNewFile *.c :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
+"   autocmd BufNewFile *.c :exe "%s/{{HEADER}}/" . expand("%:t:r") . ".h/g"
+"   autocmd BufNewFile *.c :normal gg"_ddGG
+" augroup END
+"
+" " Do various things for x86 Assembly files
+" augroup ctemplates
+"   autocmd BufNewFile *.S :read ~/.vim/templates/S.tpl
+"   autocmd BufNewFile *.S :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
+"   autocmd BufNewFile *.S :normal gg"_ddGG
+" augroup END
+"
+" " Do various things for C header files
+" augroup htemplates
+"   autocmd BufNewFile *.h :read ~/.vim/templates/h.tpl
+"   autocmd BufNewFile *.h :exe "%s/{{FILE}}/" . expand("%:t") . "/g"
+"   autocmd BufNewFile *.h :exe "%s/{{DEF}}/" .
+"         \ toupper(
+"         \   substitute(
+"         \     substitute(
+"         \       expand("%:h") . "/", "^[./]*", "", ""
+"         \     ), "/", "_", "g"
+"         \   ) . expand("%:t:r")
+"         \ ) . "/g"
+"   autocmd BufNewFile *.h :normal gg"_dd
+"   autocmd BufNewFile *.h :11
+" augroup END
 
 " Strip white space on write
 autocmd BufWritePre * :%s/\s\+$//e
