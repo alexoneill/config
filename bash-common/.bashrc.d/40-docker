@@ -1,3 +1,5 @@
+#!/bin/bash
+
 LOCAL_PERSIST="cwspear/docker-local-persist-volume-plugin"
 
 function _docker_start_local_persist() {
@@ -10,6 +12,8 @@ function _docker_start_local_persist() {
 
 # Start Docker if not already started
 function _docker_start() {
+  which docker >/dev/null || return
+
   # Check to see if the local persist container is running.
   docker ps \
     | awk '{ print $2; }' \
