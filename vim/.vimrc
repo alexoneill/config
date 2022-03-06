@@ -1,28 +1,6 @@
 " .vimrc
 " aoneill - 12/05/15
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Vundle Configuration
-set nocompatible
-filetype off
-
-" Init Vundle
-set rtp+=$HOME/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Plugins
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'DoxygenToolkit.vim'
-
-" Syntax
-Plugin 'cespare/vim-toml'
-Plugin 'isRuslan/vim-es6'
-
-call vundle#end()
-filetype plugin indent on
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8

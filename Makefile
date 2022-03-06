@@ -3,7 +3,7 @@
 MAKEFILE_DIR := $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # Common modules between systems.
-COMMON := git bash-common bin-common
+COMMON := git bash-common bin-common vim
 
 #######
 # Linux
