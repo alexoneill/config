@@ -1,6 +1,7 @@
 # Targets to configure different operating systems.
 
 MAKEFILE_DIR := $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+.DEFAULT_GOAL := all
 
 # Common modules between systems.
 COMMON := git bash-common bin-common vim
@@ -15,15 +16,8 @@ ifeq ($(UNAME_S),Linux)
 STOW := : --dir=$(MAKEFILE_DIR) --target=$(HOME)
 
 # The Linux-specific targets to install.
-TARGETS := bash-linux bin-linux fonts-linux i3-linux x11-linux
-
-.PHONY: all
-all:
-	$(STOW) $(COMMON) $(TARGETS)
-
-.PHONY: clean
-clean:
-	$(STOW) -D $(COMMON) $(TARGETS)
+DEPS :=
+TARGETS := $(COMMON) bash-linux bin-linux fonts-linux i3-linux x11-linux
 
 endif
 
@@ -36,16 +30,8 @@ ifeq ($(UNAME_S),Darwin)
 STOW := /usr/local/bin/stow --dir=$(MAKEFILE_DIR) --target=$(HOME)
 
 # The macOS-specific targets to install.
-TARGETS := bash-macos bin-macos
-
-# Make links.
-.PHONY: all
-all: /usr/local/bin/stow
-	$(STOW) $(COMMON) $(TARGETS)
-
-.PHONY: clean
-clean:
-	$(STOW) -D $(COMMON) $(TARGETS)
+DEPS := /usr/local/bin/stow
+TARGETS := $(COMMON) bash-macos bin-macos
 
 # https://brew.sh/
 /usr/local/bin/brew:
@@ -56,3 +42,14 @@ clean:
 	/usr/local/bin/brew install stow
 
 endif
+
+# Install packages
+.PHONY: all
+all: $(DEPS)
+	$(STOW) $(TARGETS)
+
+# Remove packages.
+# Pipe stderr to /dev/null, see https://github.com/aspiers/stow/issues/65
+.PHONY: clean
+clean:
+	$(STOW) -D $(TARGETS) 2>/dev/null
