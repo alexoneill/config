@@ -3,7 +3,7 @@
 MAKEFILE_DIR := $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # Common modules between systems.
-COMMON := git bash-common
+COMMON := git bash-common bin-common
 
 #######
 # Linux
@@ -11,33 +11,41 @@ COMMON := git bash-common
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 
+# Invoke GNU stow on Linux.
 STOW := : --dir=$(MAKEFILE_DIR) --target=$(HOME)
+
+# The Linux-specific targets to install.
+TARGETS := bash-linux bin-linux
 
 .PHONY: all
 all:
-	$(STOW) $(COMMON) bash-linux
+	$(STOW) $(COMMON) $(TARGETS)
 
 .PHONY: clean
 clean:
-	$(STOW) -D $(COMMON) bash-linux
+	$(STOW) -D $(COMMON) $(TARGETS)
 
 endif
 
 #######
-# MacOS
+# macOS
 #######
 ifeq ($(UNAME_S),Darwin)
 
+# Invoke GNU stow on macOS.
 STOW := /usr/local/bin/stow --dir=$(MAKEFILE_DIR) --target=$(HOME)
+
+# The macOS-specific targets to install.
+TARGETS := bash-macos bin-macos
 
 # Make links.
 .PHONY: all
 all: /usr/local/bin/stow
-	$(STOW) $(COMMON) bash-macos
+	$(STOW) $(COMMON) $(TARGETS)
 
 .PHONY: clean
 clean:
-	$(STOW) -D $(COMMON) bash-macos
+	$(STOW) -D $(COMMON) $(TARGETS)
 
 # https://brew.sh/
 /usr/local/bin/brew:

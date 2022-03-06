@@ -1,6 +1,4 @@
 #!/bin/bash
-# bw
-# aoneill - 01/15/16
 
 # Get rid of colors from pipe in
 sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
