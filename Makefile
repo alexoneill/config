@@ -15,7 +15,7 @@ ifeq ($(UNAME_S),Linux)
 STOW := : --dir=$(MAKEFILE_DIR) --target=$(HOME)
 
 # The Linux-specific targets to install.
-TARGETS := bash-linux bin-linux
+TARGETS := bash-linux bin-linux fonts-linux
 
 .PHONY: all
 all:
