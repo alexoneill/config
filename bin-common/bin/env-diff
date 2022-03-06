@@ -9,6 +9,6 @@ cd ~/.env/git
 tmp="$(mktemp)"
 git diff --color=always > "$tmp"
 
-(( ! QUIET )) && less -R "$tmp"
+(( ! QUIET )) && [ -s "$tmp" ] && less -R "$tmp"
 status="$(test -n "$(cat "$tmp")"; echo "$?")"
 exit $status
