@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Colors for termite
+eval $(dircolors ~/.bashrc.d/data/dircolors)

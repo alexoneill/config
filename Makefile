@@ -2,6 +2,9 @@
 
 MAKEFILE_DIR := $(abspath $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
+# Common modules between systems.
+COMMON := git bash-common
+
 #######
 # Linux
 #######
@@ -12,11 +15,11 @@ STOW := : --dir=$(MAKEFILE_DIR) --target=$(HOME)
 
 .PHONY: all
 all:
-	:
+	$(STOW) $(COMMON) bash-linux
 
 .PHONY: clean
 clean:
-	:
+	$(STOW) -D $(COMMON) bash-linux
 
 endif
 
@@ -30,11 +33,11 @@ STOW := /usr/local/bin/stow --dir=$(MAKEFILE_DIR) --target=$(HOME)
 # Make links.
 .PHONY: all
 all: /usr/local/bin/stow
-	$(STOW) git
+	$(STOW) $(COMMON) bash-macos
 
 .PHONY: clean
 clean:
-	$(STOW) -D git
+	$(STOW) -D $(COMMON) bash-macos
 
 # https://brew.sh/
 /usr/local/bin/brew:
@@ -45,4 +48,3 @@ clean:
 	/usr/local/bin/brew install stow
 
 endif
-

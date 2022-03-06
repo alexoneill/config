@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Sudo shortcuts
+alias airplane="sudo airplane"
+alias amount="sudo amount"
+alias aumount="sudo aumount"
+alias journalctl="sudo journalctl"
+alias lid="sudo lid"
+alias pacman="sudo pacman"
+alias pacro="sudo pacro"
+alias roam="sudo roam"
+alias systemctl="sudo systemctl"
+alias wifi-menu="sudo wifi-menu"
+alias wpa-scan="sudo wpa-scan"
+
+# Mapping
+alias lock="sxlock"
+alias net="nmcli"
+alias open="xdg-open"
+alias vi="vim"
+
+# Mapping with flags
+alias dhcp="sudo dhcpcd -k; sudo dhcpcd -n"
+alias pacaur="pacaur --aur"
+alias csim="sim -no-gui -no-win"
+alias reload-udev="sudo udevadm control --reload-rules"
+alias i3-restart="i3-msg restart"

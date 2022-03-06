@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Start the X Server if it is not running
+if [[ -z "$SSH_CLIENT" && -z "$SSH_TTY"  && -z "$DISPLAY" ]]; then
+  startx &>/dev/null && exit $?
+fi
+
+# Fix line sizing issues
+shopt -s checkwinsize
+
+# Disable CAPS LOCK
+[ -x /usr/bin/setxkbmap ] && setxkbmap -option ctrl:nocaps

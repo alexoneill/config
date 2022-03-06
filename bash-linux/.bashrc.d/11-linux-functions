@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Printing certain statistics about drives
+function printDriveStats() {
+  disp=$1
+
+  # If a name is passed in as well, display it
+  if (( $# == 2 )); then
+    echo -ne "${BLD_BLU}$1${TXT_RST}: "
+    disp=$2
+  fi
+
+  free="$(df -h | grep $1 |\
+    perl -n -e '/(.*)G (.*)G (.*)G/ && print($2)' |\
+    sed -e 's/ //g')G"
+  used="$(df -h | grep $1 |\
+    perl -n -e '/(.*)G (.*)G (.*)G/ && print($3)' |\
+    sed -e 's/ //g')G"
+
+  # Print statistics
+  echo -ne "${BLD_CYN}${disp}${TXT_RST} -- "
+  echo -ne "Used Space: ${BLD_RED}${free}${TXT_RST}, "
+  echo -ne "Free Space: ${BLD_GRN}${used}${TXT_RST}"
+  echo
+}
+
+function i3bar-relaod() {
+  i3-msg -t command reload
+  killall i3bar
+
+  bar_id=$(i3-msg -t get_bar_config | sed -e 's/.*"bar-\([0-9]\+\)".*/bar-\1/')
+  i3bar --bar_id=${bar_id} --socket=$(i3 --get-socketpath) &
+}

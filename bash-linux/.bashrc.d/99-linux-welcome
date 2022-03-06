@@ -1,0 +1,17 @@
+#!/bin/bash
+
+! [ -t 0 ] && return;
+
+# Printing drive statistics
+# Laptop
+hostname | grep "Laptop" > /dev/null
+if [ $? -eq 0 ]; then
+  printDriveStats /dev/sda3 SSD
+fi
+
+# Desktop
+hostname | grep "Desktop" > /dev/null
+if [ $? -eq 0 ]; then
+  printDriveStats /dev/sda2 SDD
+  printDriveStats /dev/sdb2 HDD
+fi
