@@ -27,19 +27,20 @@ endif
 ifeq ($(UNAME_S),Darwin)
 
 # Invoke GNU stow on macOS.
-STOW := /usr/local/bin/stow --dir=$(MAKEFILE_DIR) --target=$(HOME)
+STOW := /opt/homebrew/bin/stow --dir=$(MAKEFILE_DIR) --target=$(HOME)
 
 # The macOS-specific targets to install.
-DEPS := /usr/local/bin/stow
+DEPS := /opt/homebrew/bin/stow
 TARGETS := $(COMMON) bash-macos bin-macos
 
 # https://brew.sh/
-/usr/local/bin/brew:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+BREW := /opt/homebrew/bin/brew
+$(BREW):
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install stow if needed
-/usr/local/bin/stow: /usr/local/bin/brew
-	/usr/local/bin/brew install stow
+$(STOW): $(BREW)
+	$(BREW) install stow
 
 endif
 

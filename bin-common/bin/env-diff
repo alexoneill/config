@@ -2,10 +2,12 @@
 # env-status
 # aoneill - 08/23/16
 
+ENV=~/.config/env
+
 QUIET="0"
 [[ "$#" == "1" ]] && [[ "$1" == "-q" || "$1" == "--quiet" ]] && QUIET="1"
 
-cd ~/.env/git
+cd "${ENV}"
 tmp="$(mktemp)"
 git diff --color=always > "$tmp"
 

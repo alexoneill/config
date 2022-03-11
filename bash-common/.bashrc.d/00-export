@@ -15,8 +15,8 @@ export TERM=xterm-color
 export LESSCHARSET=utf-8
 
 # Ignore duplicates in Bash history
-export HISTSIZE=-1
-export HISTFILESIZE=-1
+export HISTSIZE='INF'
+export HISTFILESIZE='INF'
 export HISTCONTROL=ignoreboth:erasedups
 
 # Colors

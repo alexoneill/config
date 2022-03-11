@@ -2,8 +2,10 @@
 # env-update
 # aoneill - 07/24/16
 
+ENV=~/.config/env
+
 CWD=$(pwd)
-cd ~/.env/git
+cd "${ENV}"
 
 git add -A
 git commit --verbose -a
