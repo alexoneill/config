@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Source all the brew completion files.
+HOMEBREW="$(brew --prefix)"
+[[ -r "${HOMEBREW}/etc/profile.d/bash_completion.sh" ]] \
+  && . "${HOMEBREW}/etc/profile.d/bash_completion.sh"
+
+# gcloud CLI Completion.
+source "${HOMEBREW}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
