@@ -99,3 +99,10 @@ function github() {
     xdg-open $(echo $origin | sed -e "s|^git@github.com:|https://github.com|")
 }
 
+function prettier() {
+  # Run in current directory if no default is given.
+  local dir="$1"
+  [[ -z "${dir}" ]] && dir=".";
+
+  npx prettier --write "${dir}"
+}

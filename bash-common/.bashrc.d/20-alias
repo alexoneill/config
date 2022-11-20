@@ -4,7 +4,6 @@
 
 # Aliases
 alias sudo="sudo -E"
-alias prettier="npx prettier --write ."
 
 # Sudo shortcuts
 alias airplane="sudo airplane"
@@ -45,7 +44,7 @@ alias ll="ls -l"
 alias pacaur="pacaur --aur"
 alias perms="stat -c '%a %n'"
 alias psgrep="ps aux | grep"
-alias pyfix="yapf --style='{based_on_style: google, indent_width: 2}' -r -i"
+alias pyfix="yapf --style='${HOME}/.config/yapf/config.yaml' -r -i"
 alias csim="sim -no-gui -no-win"
 alias vdiff='diff --width=$(tput cols) -y'
 alias reload-udev="sudo udevadm control --reload-rules"
