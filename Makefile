@@ -13,11 +13,14 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 
 # Invoke GNU stow on Linux.
-STOW := : --dir=$(MAKEFILE_DIR) --target=$(HOME)
+STOW := /usr/bin/stow --dir=$(MAKEFILE_DIR) --target=$(HOME)
 
 # The Linux-specific targets to install.
-DEPS :=
+DEPS := /usr/bin/stow
 TARGETS := $(COMMON) bash-linux bin-linux fonts-linux i3-linux x11-linux
+
+$(DEPS):
+	sudo apt install stow
 
 endif
 
@@ -39,7 +42,7 @@ $(BREW):
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install stow if needed
-$(STOW): $(BREW)
+$(DEPS): $(BREW)
 	$(BREW) install stow
 
 endif
