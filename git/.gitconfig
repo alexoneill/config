@@ -1,6 +1,6 @@
 [user]
 	name = Alex O'Neill
-	email = git@aoneill.me
+	email = me@aoneill.me
 
 [alias]
   # Shortcuts
@@ -10,7 +10,8 @@
   co = checkout
 
   # Aliases
-  append = commit --amend --no-edit
+  ammend = commit --amend --no-edit
+  am = commit --amend --no-edit
   pending = status
   p = status
 
@@ -24,3 +25,10 @@
 	editor = vim --cmd 'let nojump=1'
 	whitespace = trailing-space,tab-in-indent
 	autocrlf = input
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

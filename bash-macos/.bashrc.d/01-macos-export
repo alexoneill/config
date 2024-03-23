@@ -10,6 +10,12 @@ export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/tools/bin
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
+# Rust
+export PATH=$HOME/.cargo/bin:$PATH
+
+# pipx
+export PATH="$PATH:/Users/alexoneill/.local/bin"
+
 # Additional man(1) paths.
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 

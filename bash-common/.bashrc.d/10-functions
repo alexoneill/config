@@ -106,3 +106,9 @@ function prettier() {
 
   npx prettier --write "${dir}"
 }
+
+function cin() {
+  pushd /Users/alexoneill/.config/env/packages/macos &> /dev/null
+  brew install "$@" && touch "$@"
+  popd &> /dev/null
+}
