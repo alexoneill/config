@@ -1,4 +1,7 @@
 #!/bin/bash
 
+# Make sure termite works well
+export TERM=xterm-color
+
 # Colors for termite
 eval $(dircolors ~/.bashrc.d/data/dircolors)

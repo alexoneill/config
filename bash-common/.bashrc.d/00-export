@@ -8,9 +8,6 @@ export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR=vim
 
-# Make sure termite works well
-export TERM=xterm-color
-
 # Unicode support for less
 export LESSCHARSET=utf-8
 
